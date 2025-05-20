@@ -1,0 +1,79 @@
+body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f4f7fa;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #0052cc, #007fff);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+    }
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 20px;
+    }
+    .search-bar {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .search-bar input {
+      padding: 15px;
+      font-size: 16px;
+      width: 250px;
+      border: none;
+      border-radius: 10px 0 0 10px;
+    }
+    .search-bar button {
+      padding: 15px;
+      background: gold;
+      border: none;
+      border-radius: 0 10px 10px 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .features {
+      display: flex;
+      justify-content: space-around;
+      padding: 50px 20px;
+      background: white;
+    }
+    .feature-box {
+      max-width: 300px;
+      text-align: center;
+    }
+    .feature-box img {
+      width: 80px;
+      height: 80px;
+    }
+    .testimonials {
+      background: #eef2f5;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .testimonial {
+      max-width: 600px;
+      margin: 20px auto;
+      font-style: italic;
+    }
+    .cta-banner {
+      background: #0052cc;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    footer {
+      background: #002f6c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+   
