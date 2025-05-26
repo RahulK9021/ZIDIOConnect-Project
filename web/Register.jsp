@@ -5,7 +5,55 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="requirepackage.DBConnect" %>
+<%@page import="requirepackage.Registration" %>
+<%@page import="requirepackage.UserController" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%--<%@page import="java.lang.Exception%>--%>
 <!DOCTYPE html>
+<%
+            DBConnect dbc=new DBConnect();
+            UserController utc=new UserController();
+            if(request.getParameter("btnsub") != null){
+                Registration reg=new Registration();
+                reg.setEmail(request.getParameter("uid"));
+                reg.setPassword(request.getParameter("pwd"));
+                reg.setFullnm(request.getParameter("unm"));
+                String phoneStr = request.getParameter("phone");
+                if (phoneStr != null && !phoneStr.isEmpty()) {
+                    try {
+                        reg.setPhoneno(Integer.parseInt(phoneStr));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid phone number format: " + phoneStr);
+                    }
+                } else {
+                    System.out.println("Phone number is missing or empty.");
+                }
+
+               try {
+                String dateStr = request.getParameter("date");
+                if (dateStr != null && !dateStr.isEmpty()) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    Date utilDate = formatter.parse(dateStr); 
+                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime()); 
+                    reg.setDate(sqlDate);
+                } else {
+                    System.out.println("Date parameter is missing or empty.");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace(); // Log the error to help debug
+            }
+                reg.setGender(request.getParameter("gender"));
+                reg.setAddress(request.getParameter("city"));
+                reg.setStatus(request.getParameter("status"));
+                reg.setType(request.getParameter("type"));
+                if(utc.addRegistration(reg)){
+                response.sendRedirect("Login.jsp");
+            }
+            }
+            
+        %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -102,43 +150,42 @@
       }
     }  
         </style>
+        
     </head>
     <body>
       <div class="form-wrapper">
     <h1>Registration</h1>
-    <form action="Internship.jsp" method="POST">
+    <form method="POST">
       <div class="form-grid">
         
         <div class="form-group">
-          <label for="uid">User ID</label>
-          <input type="text" id="uid" name="uid" placeholder="User ID" required />
+          <label for="uid">E-Mail</label>
+          <input type="email" name="uid" placeholder="E-Mail" required />
+        </div>
+          
+         <div class="form-group">
+          <label for="unm">Password</label>
+          <input type="password" name="pwd" placeholder="Password" required />
         </div>
           
         <div class="form-group">
           <label for="unm">Full Name</label>
-          <input type="text" id="unm" name="unm" placeholder="Full Name" required />
+          <input type="text"  name="unm" placeholder="Full Name" required />
         </div>
 
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="abc@gmail.com" required />
-        </div>
-        
-          
-        <div class="form-group">
           <label for="phone">Phone</label>
-          <input type="tel" id="phone" placeholder="123-456-7890" />
+          <input type="tel" name="phone" placeholder="123-456-7890" />
         </div>
 
         <div class="form-group">
           <label for="dob">Date of Birth</label>
-          <input type="date" id="dob" />
+          <input type="date" name="dob" />
         </div>
 
         <div class="form-group">
           <label for="gender">Gender</label>
-          <select id="gender">
-            <option value="">Select</option>
+          <select name="gender">
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -147,20 +194,28 @@
           
         <div class="form-group">
           <label for="City">City</label>
-           <input type="text" id="unm" name="city" placeholder="City" required />
+           <input type="text" name="city" placeholder="City" required />
         </div>
           
            <div class="form-group">
           <label for="website">Married Status</label>
           <select name="status">
-              <option>Unmarried</option>
+              <option>Single</option>
               <option>Married</option>
+          </select>
+        </div>
+          
+          <div class="form-group">
+          <label for="type">Register as</label>
+          <select name="type">
+              <option>Jobseeker</option>
+              <option>Recruiter</option>
           </select>
         </div>
       </div>
         
       <div class="form-footer">
-        <button type="submit" class="submit-btn">Save Profile</button>
+          <input type="submit" class="submit-btn" name="btnsub" value="Save Profile">
         <div class="register">
         <p>Already have an account? <a href="Login.jsp">Login here</a></p>
         </div>

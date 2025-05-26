@@ -1,4 +1,4 @@
- body {
+/* body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f2f2f2;
@@ -87,3 +87,24 @@
         height: 50px;
         width: 50px;
     }
+    .card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .extra-details {
+            display: none; 
+        }
+        .toggle-btn {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }*/
+        

@@ -5,7 +5,42 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="requirepackage.UserLogin" %>
+<%@page import="requirepackage.DBConnect" %>
+<%@page import="requirepackage.UserController" %>
+<%@page import="java.sql.*" %>
 <!DOCTYPE html>
+<%
+    String uid = request.getParameter("uid");
+    String password = request.getParameter("pwd");
+    boolean isValid = false;
+
+    if(uid != null && password != null) {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/zidioconnect", "root", "9021");
+            String query = "SELECT * FROM userregisterationuserregisteration WHERE uid = ? AND password = ?";
+            
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, uid);
+            pst.setString(2, password);
+            
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                isValid = true;
+                response.sendRedirect("Internship.jsp");
+                 out.println("<script>alert('Login Successful! Welcome, " + uid + "!'); </script>");
+            }else{
+             out.println("<script>alert('Invalid Username or Password. Try again.');</script>");
+             }
+            con.close();
+        } catch (Exception e) {
+            out.println("Database connection error: " + e.getMessage());
+        }
+    }
+%>
+
+    
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -112,30 +147,21 @@
 <body>
      <div class="form-wrapper">
     <h1>Login</h1>
-    <form action="Internship.jsp" method="POST">
+    <form  method="POST">
       <div class="form-grid">
-          
-           <div class="form-group">
-               <label for="type">Login As</label>
-          <select id="type">
-            <option value="">Select</option>
-            <option value="male">Jobseeker</option>
-            <option value="female">recruiter</option>
-          </select>
-        </div>       
         
         <div class="form-group">
-          <label for="uid">User ID</label>
-          <input type="text" id="uid" name="uid" placeholder="User ID" required />
+          <label for="uid">G-mail For Login</label>
+          <input type="email" name="uid" placeholder="User G-mail" required />
         </div>
           
         <div class="form-group">
           <label for="unm">Password</label>
-          <input type="password" id="unm" name="pwd" placeholder="Password" required />
+          <input type="password" name="pwd" placeholder="Password" required />
         </div>
 
         <div class="form-footer">
-        <button type="submit" class="submit-btn">Login</button>
+            <input type="submit" class="submit-btn" name="btnsub" value="Login">
          <div class="register">
         <p>Don't have an account? <a href="Register.jsp">Register here</a></p>
         </div>
