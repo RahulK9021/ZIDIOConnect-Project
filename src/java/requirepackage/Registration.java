@@ -91,6 +91,11 @@ public class Registration {
         return date;
     }
 
+    @Override
+    public String toString() {
+        return "Registration{" + "email=" + email + ", fullnm=" + fullnm + ", gender=" + gender + ", address=" + address + ", status=" + status + ", password=" + password + ", type=" + type + ", phoneno=" + phoneno + ", date=" + date + '}';
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }

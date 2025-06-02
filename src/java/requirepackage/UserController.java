@@ -1,3 +1,5 @@
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -26,7 +28,7 @@ public class UserController {
      }
      
      public boolean addRegistration(Registration obj){
-         sql="insert into userregisterationuserregisteration values('"+obj.getEmail()+"','"+obj.getPassword()+"','"+obj.getFullnm()+"',"+obj.getPhoneno()+","+obj.getDate()+",'"+obj.getGender()+"','"+obj.getAddress()+"','"+obj.getStatus()+"','"+obj.getType()+"')";
+         sql="insert into userregisterationuserregisteration values('"+obj.getEmail()+"','"+obj.getPassword()+"','"+obj.getFullnm()+"',"+obj.getPhoneno()+",'"+obj.getDate()+"','"+obj.getGender()+"','"+obj.getAddress()+"','"+obj.getStatus()+"','"+obj.getType()+"')";
          dbc.addRegistration(sql);
          return true;
      }

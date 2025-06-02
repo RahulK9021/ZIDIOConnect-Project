@@ -1,0 +1,22 @@
+SELECT * FROM zidioconnect.companies;
+
+CREATE TABLE `candidate` (
+  `studentid` int DEFAULT NULL,
+  `studname` varchar(30) DEFAULT NULL,
+  `studemail` varchar(30) DEFAULT NULL,
+  `resumelink` varchar(20) DEFAULT NULL,
+  `socialmedialink` varchar(30) DEFAULT NULL,
+  `createddate` date DEFAULT NULL,
+  `updateddate` date DEFAULT NULL,
+  `createdby` varchar(20) DEFAULT NULL,
+  `updatedby` varchar(20) DEFAULT NULL,
+  `experience` varchar(20) DEFAULT NULL,
+  `excompanyname` varchar(20) DEFAULT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  `position` varchar(20) DEFAULT NULL,
+  `actualsalary` int DEFAULT NULL,
+  `expectedsalary` int DEFAULT NULL,
+  `skills` varchar(50) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
