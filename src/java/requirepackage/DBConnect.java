@@ -7,7 +7,7 @@ public class DBConnect {
     Connection cn;
     String sql;
     DBConnect dbc;
-     String url =("jdbc:mysql://localhost:3306/zidioconnect");
+    String url =("jdbc:mysql://localhost:3306/zidioconnect?useSSL=false");
     
     public DBConnect(){
        try{
@@ -17,6 +17,9 @@ public class DBConnect {
        }catch(Exception ex){
            System.out.print(ex);
        }
+    }
+     public Connection getConnection() {
+        return cn;
     }
     public boolean addLogin(String sql)
     {
@@ -28,7 +31,7 @@ public class DBConnect {
         }
         return true;
     }
-    public boolean addRegistration(String sql)
+    public boolean addUserRegistration(String sql)
     {
         try{
         stmt=cn.createStatement();
@@ -47,4 +50,36 @@ public class DBConnect {
         }
         return true;
     }
+    
+    public boolean addRecruiter(String sql){
+        try{
+            stmt=cn.createStatement();
+            stmt.executeUpdate(sql);
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+         return true;
+    }
+    
+    
+    public ResultSet getInternships(String sql){
+        try{
+        stmt=cn.createStatement();
+        rs=stmt.executeQuery(sql);
+    }catch(Exception ex){
+            System.out.println(ex);
+            }
+        return rs;
+    }
+    
+    public ResultSet getJobs(String sql){
+        try{
+            stmt=cn.createStatement();
+            rs=stmt.executeQuery(sql);
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return rs;
+    }
+   
 }

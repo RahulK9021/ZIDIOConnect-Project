@@ -1,36 +1,25 @@
 
 package requirepackage;
-import java.sql.*;
+import java.sql.Date;
 
 
 public class Registration {
-    String email,fullnm,gender,address,status,password ,type;
-
-   
-    int phoneno;
+    String email,fullnm,gender,password;
+    String  phoneno;
     Date date;
-
     public Registration() {
+        
     }
 
-    public Registration(String email,String password, String fullnm,int phoneno, Date date, String gender, String address, String status ,String type) {
+    public Registration(String email,String password, String fullnm,String  phoneno,  String gender ,Date date) {
         this.email = email;
         this.fullnm = fullnm;
-        this.gender = gender;
-        this.address = address;
-        this.status = status;
         this.phoneno = phoneno;
-        this.date = date;
         this.password=password;
-        this.type=type;
+        this.gender=gender;
+        this.date=date;
     }
-     public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+    
     public String getPassword() {
         return password;
     }
@@ -51,6 +40,14 @@ public class Registration {
         return fullnm;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public void setFullnm(String fullnm) {
         this.fullnm = fullnm;
     }
@@ -63,41 +60,12 @@ public class Registration {
         this.gender = gender;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getPhoneno() {
+    public String  getPhoneno() {
         return phoneno;
     }
 
-    public void setPhoneno(int phoneno) {
+    public void setPhoneno(String  phoneno) {
         this.phoneno = phoneno;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    @Override
-    public String toString() {
-        return "Registration{" + "email=" + email + ", fullnm=" + fullnm + ", gender=" + gender + ", address=" + address + ", status=" + status + ", password=" + password + ", type=" + type + ", phoneno=" + phoneno + ", date=" + date + '}';
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
     
 }

@@ -1,0 +1,41 @@
+ body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    .job-post {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .company {
+      color: #7f8c8d;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-top: 25px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .apply-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .apply-button:hover {
+      background-color: #2980b9;
+    }

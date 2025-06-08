@@ -6,6 +6,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@page import="requirepackage.DBConnect" %>
+<%@page import="requirepackage.Registration" %>
+<%@page import="requirepackage.UserController" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@page  import="java.sql.*" %>
+<%
+  DBConnect dbc=new DBConnect();
+  UserController utc=new UserController();
+  ResultSet rs=dbc.getJobs("select comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='job'");
+    
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -175,48 +186,26 @@
          </header>
   <section id="internships" class="section">
            <h2>Latest Jobs For You</h2>
-           <div class="internships">
+           <div class="jobs">
              <div class="card">
-               <h3>Java Developer </h3>
-               <p><b>🚀 Company :</b><a href="#">Leading IT MNC</a> <br>🎯 <b>Skill :</b> Strong Knowledge About java<br><b>📍 Location: </b>Kolhapur <br> &nbsp;<b>     ₹   Salary :</b> 5-7 LPA <br><b>🕒 Experience</b> 0-1 Yrs</p><p><b>💼 Description:</b>
-                Developing and delivering high-volume, low-latency applications for mission-critical systems.</p>
+                 <% 
+                    while (rs.next())
+                 {
+                 %>
+                 <h3>Java Developer </h3>
+                 <p><b>🚀 Company :</b><%= rs.getString(1) %><br></p>
+                    <p> <b>  Job Role :</b><%=rs.getString(2) %><br></p>
+                    <p>  <b>🎯 Skills : </b><%=rs.getString(3)%> <br> </p>
+                    <p> <b> Location :</b> <%=rs.getString(4) %> <br></p>
+                    <p>  <b> Deadline :</b> <%= rs.getString(5) %></p>
+                 <p><b>  &nbsp;    ₹   Salary :</b><%=rs.getString(6)%></p>
+                  <p><b>🕒 Experience :</b><%=rs.getString(7) %><br></p>
+                   <p>  💼 <b> Description: :</b><%=rs.getString(8) %><br></p>
                <a href="#" class="btn">Apply Now</a>
              </div>
-               
-            <div class="card">
-               <h3>Frontend Developer </h3>
-               <p><b>🚀 Company :</b><a href="#">MindTech</a> <br>🎯 <b>Skill :</b> tailwind css,css3<br><b>📍 Location: </b>Bangaluru <br> &nbsp;<b>     ₹   Salary :</b> 3-4 LPA<br><b>🕒 Experience</b> 0-1 Yrs</p><p><b>💼 Description:</b>
-                Direct involvement in elements of design, development and maintenance of website.</p>
-               <a href="#" class="btn">Apply Now</a>
-             </div>
-               
-             <div class="card">
-               <h3>Planning Engineer </h3>
-               <p><b>🚀 Company :</b><a href="#">Afcon</a> <br>🎯 <b>Skill :</b> DevOps,AWS<br><b>📍 Location: </b>Mumbai <br> &nbsp;<b>     ₹   Salary :</b> Not Disclose<br><b>🕒 Experience</b> 5-6 Yrs</p><p><b>💼 Description:</b>
-                Developing and delivering high-volume, low-latency applications for mission-critical systems.</p>
-               <a href="#" class="btn">Apply Now</a>
-             </div>
-               
-              <div class="card">
-               <h3>Data Analyst </h3>
-               <p><b>🚀 Company :</b><a href="#">US Multinational Company</a> <br>🎯 <b>Skill :</b> MS-Excel ,ML<br><b>📍 Location: </b>Remote <br> &nbsp;<b>     ₹   Salary :</b> 4-7 LPA <br><b>🕒 Experience</b> 2-3 Yrs</p><p><b>💼 Description:</b>
-                Interpreting data, analyzing results using statistical techniques</p>
-               <a href="#" class="btn">Apply Now</a>
-             </div>
-               
-              <div class="card">
-               <h3>Python Developer </h3>
-               <p><b>🚀 Company :</b><a href="#">Leading IT MNC</a> <br>🎯 <b>Skill :</b> Strong Knowledge About python<br><b>📍 Location: </b>Indore <br> &nbsp;<b>     ₹   Salary :</b> 2-3 LPA <br><b>🕒 Experience</b> 0-3 Yrs</p><p><b>💼 Description:</b>
-                Analyze user needs and software requirements to determine feasibility of design within time and cost constraints.</p>
-               <a href="#" class="btn">Apply Now</a>
-             </div>
-               
-              <div class="card">
-               <h3> Data Annotation Specialist</h3>
-               <p><b>🚀 Company :</b><a href="#">ServiceMax</a> <br>🎯 <b>Skill :</b> Strong Knowledge About annotating<br><b>📍 Location: </b>Delhi <br> &nbsp;<b>     ₹   Salary :</b> 8-9 LPA <br><b>🕒 Experience</b> 5-7 Yrs</p><p><b>💼 Description:</b>
-                Annotating and labeling various data types (images, videos, text, or audio) according to project guidelines.</p>
-               <a href="#" class="btn">Apply Now</a>
-             </div>
+                 <%
+                     }
+                     %>
            </div>
          </section>
 

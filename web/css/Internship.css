@@ -1,57 +1,91 @@
-/* body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f2f2f2;
+      :root {
+      --primary: #00b894;
+      --accent: #0984e3;
+      --bg: #f0f2f5;
+      --text: #2d3436;
+      --card: #fff;
     }
 
-    .navbar {
-      background-color: #1a1a2e;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    nav {
+      background: var(--primary);
+      padding: 1rem 2rem;
       color: white;
-      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .navbar h1 {
-      margin: 0;
-      font-size: 24px;
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
     }
 
-    .nav-links a {
-      color: #fff;
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: white;
       text-decoration: none;
-      margin-left: 20px;
-      font-size: 16px;
+      font-weight: 500;
     }
 
-    .nav-links a:hover {
-      text-decoration: underline;
+    header {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: white;
     }
 
-    .dashboard {
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    .section {
+      padding: 4rem 2rem;
       max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px;
+      margin: auto;
     }
 
-    .dashboard h2 {
-      margin-bottom: 20px;
-      color: #333;
+    .section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--primary);
     }
 
-    .card-container {
+    .internships {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
 
     .card {
-      background: #fff;
+      background: var(--card-bg);
+      padding: 2rem;
       border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
     }
 
     .card:hover {
@@ -59,52 +93,54 @@
     }
 
     .card h3 {
-      margin-top: 0;
-      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
     }
 
     .card p {
-      margin: 5px 0;
-      color: #666;
-      font-size: 14px;
+      font-size: 0.95rem;
+      color: #555;
     }
 
-    .card .apply {
-      margin-top: 15px;
+    .btn {
       display: inline-block;
-      padding: 8px 12px;
-      background-color: #007bff;
+      margin-top: 1rem;
+      padding: 0.6rem 1.5rem;
+      background: var(--primary);
       color: white;
-      border-radius: 5px;
+      border-radius: 30px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      transition: background 0.3s;
     }
 
-    .card .apply:hover {
-      background-color: #0056b3;
+    .btn:hover {
+      background: var(--secondary);
     }
-    img{
-        height: 50px;
-        width: 50px;
+
+    .cta {
+      text-align: center;
+      background: #ffffff;
+      padding: 4rem 2rem;
+      margin-top: 4rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
     }
-    .card {
-            border: 1px solid #ccc;
-            padding: 15px;
-            width: 300px;
-            text-align: center;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .extra-details {
-            display: none; 
-        }
-        .toggle-btn {
-            margin-top: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }*/
-        
+
+    footer {
+      background: #212529;
+      color: #ddd;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }

@@ -3,6 +3,11 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import requirepackage.DBConnect;
+import requirepackage.Registration;
+import requirepackage.UserController;
+import java.text.SimpleDateFormat;
+import java.sql.*;
 
 public final class JobPortal_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -45,6 +50,18 @@ public final class JobPortal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+
+  DBConnect dbc=new DBConnect();
+  UserController utc=new UserController();
+  ResultSet rs=dbc.getJobs("select comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='internship'");
+    
+
+      out.write("\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
@@ -216,47 +233,38 @@ public final class JobPortal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("           <h2>Latest Jobs For You</h2>\n");
       out.write("           <div class=\"internships\">\n");
       out.write("             <div class=\"card\">\n");
-      out.write("               <h3>Java Developer </h3>\n");
-      out.write("               <p><b>🚀 Company :</b><a href=\"#\">Leading IT MNC</a> <br>🎯 <b>Skill :</b> Strong Knowledge About java<br><b>📍 Location: </b>Kolhapur <br> &nbsp;<b>     ₹   Salary :</b> 5-7 LPA <br><b>🕒 Experience</b> 0-1 Yrs</p><p><b>💼 Description:</b>\n");
-      out.write("                Developing and delivering high-volume, low-latency applications for mission-critical systems.</p>\n");
+      out.write("                 ");
+ 
+                    while (rs.next())
+                 {
+                 
+      out.write("\n");
+      out.write("                 <h3>Java Developer </h3>\n");
+      out.write("                 <p><b>🚀 Company :</b>");
+      out.print( rs.getString(1) );
+      out.write("<br>\n");
+      out.write("                     🎯 <b>Skill :</b>");
+      out.print(rs.getString(2) );
+      out.write("<br>\n");
+      out.write("                     <b>📍 Location: </b>");
+      out.print(rs.getString(3));
+      out.write(" <br> \n");
+      out.write("                     &nbsp;<b>     ₹   Salary :</b> ");
+      out.print(rs.getString(4) );
+      out.write(" <br>\n");
+      out.write("                     <b>🕒 Experience</b> ");
+      out.print( rs.getString(5) );
+      out.write("</p>\n");
+      out.write("                 <p><b>💼 Description:</b>");
+      out.print(rs.getString(6));
+      out.write("</p>\n");
       out.write("               <a href=\"#\" class=\"btn\">Apply Now</a>\n");
       out.write("             </div>\n");
-      out.write("               \n");
-      out.write("            <div class=\"card\">\n");
-      out.write("               <h3>Frontend Developer </h3>\n");
-      out.write("               <p><b>🚀 Company :</b><a href=\"#\">MindTech</a> <br>🎯 <b>Skill :</b> tailwind css,css3<br><b>📍 Location: </b>Bangaluru <br> &nbsp;<b>     ₹   Salary :</b> 3-4 LPA<br><b>🕒 Experience</b> 0-1 Yrs</p><p><b>💼 Description:</b>\n");
-      out.write("                Direct involvement in elements of design, development and maintenance of website.</p>\n");
-      out.write("               <a href=\"#\" class=\"btn\">Apply Now</a>\n");
-      out.write("             </div>\n");
-      out.write("               \n");
-      out.write("             <div class=\"card\">\n");
-      out.write("               <h3>Planning Engineer </h3>\n");
-      out.write("               <p><b>🚀 Company :</b><a href=\"#\">Afcon</a> <br>🎯 <b>Skill :</b> DevOps,AWS<br><b>📍 Location: </b>Mumbai <br> &nbsp;<b>     ₹   Salary :</b> Not Disclose<br><b>🕒 Experience</b> 5-6 Yrs</p><p><b>💼 Description:</b>\n");
-      out.write("                Developing and delivering high-volume, low-latency applications for mission-critical systems.</p>\n");
-      out.write("               <a href=\"#\" class=\"btn\">Apply Now</a>\n");
-      out.write("             </div>\n");
-      out.write("               \n");
-      out.write("              <div class=\"card\">\n");
-      out.write("               <h3>data analyst </h3>\n");
-      out.write("               <p><b>🚀 Company :</b><a href=\"#\">US Multinational Company</a> <br>🎯 <b>Skill :</b> MS-Excel ,ML<br><b>📍 Location: </b>Remote <br> &nbsp;<b>     ₹   Salary :</b> 4-7 LPA <br><b>🕒 Experience</b> 2-3 Yrs</p><p><b>💼 Description:</b>\n");
-      out.write("                Interpreting data, analyzing results using statistical techniques</p>\n");
-      out.write("               <a href=\"#\" class=\"btn\">Apply Now</a>\n");
-      out.write("             </div>\n");
-      out.write("               \n");
-      out.write("              <div class=\"card\">\n");
-      out.write("               <h3>python developer </h3>\n");
-      out.write("               <p><b>🚀 Company :</b><a href=\"#\">Leading IT MNC</a> <br>🎯 <b>Skill :</b> Strong Knowledge About python<br><b>📍 Location: </b>Indore <br> &nbsp;<b>     ₹   Salary :</b> 2-3 LPA <br><b>🕒 Experience</b> 0-3 Yrs</p><p><b>💼 Description:</b>\n");
-      out.write("                Analyze user needs and software requirements to determine feasibility of design within time and cost constraints.</p>\n");
-      out.write("               <a href=\"#\" class=\"btn\">Apply Now</a>\n");
-      out.write("             </div>\n");
-      out.write("               \n");
-      out.write("              <div class=\"card\">\n");
-      out.write("               <h3> data annotation specialist</h3>\n");
-      out.write("               <p><b>🚀 Company :</b><a href=\"#\">ServiceMax</a> <br>🎯 <b>Skill :</b> Strong Knowledge About annotating<br><b>📍 Location: </b>Delhi <br> &nbsp;<b>     ₹   Salary :</b> 8-9 LPA <br><b>🕒 Experience</b> 5-7 Yrs</p><p><b>💼 Description:</b>\n");
-      out.write("                Annotating and labeling various data types (images, videos, text, or audio) according to project guidelines.</p>\n");
-      out.write("               <a href=\"#\" class=\"btn\">Apply Now</a>\n");
-      out.write("             </div>\n");
-      out.write("           </div>\n");
+      out.write("                 ");
+
+                     }
+                     
+      out.write("\n");
       out.write("         </section>\n");
       out.write("\n");
       out.write("         <section id=\"apply\" class=\"section cta\">\n");

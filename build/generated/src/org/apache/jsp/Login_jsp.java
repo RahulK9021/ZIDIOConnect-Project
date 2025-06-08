@@ -6,6 +6,7 @@ import javax.servlet.jsp.*;
 import requirepackage.UserLogin;
 import requirepackage.DBConnect;
 import requirepackage.UserController;
+import requirepackage.DBConnect;
 import java.sql.*;
 
 public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -52,44 +53,56 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("<!DOCTYPE html>\n");
+      out.write("\n");
 
-    String uid = request.getParameter("uid");
-    String password = request.getParameter("pwd");
-    boolean isValid = false;
-
-    if(uid != null && password != null) {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/zidioconnect", "root", "9021");
-            String query = "SELECT * FROM userregisterationuserregisteration WHERE uid = ? AND password = ?";
-            
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, uid);
-            pst.setString(2, password);
-            
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                isValid = true;
-                response.sendRedirect("Internship.jsp");
-                 out.println("<script>alert('Login Successful! Welcome, " + uid + "!'); </script>");
-            }else{
-             out.println("<script>alert('Invalid Username or Password. Try again.');</script>");
-             }
-            con.close();
-        } catch (Exception e) {
-            out.println("Database connection error: " + e.getMessage());
+    DBConnect dbc=new DBConnect();
+  String uid=request.getParameter("uid");
+  String pwd=request.getParameter("pwd");
+  try{
+    Connection con=dbc.getConnection();
+    String jobseekerQuery="select * from jobseeker where email = ? and password = ?";
+    String recruiterQuery="select * from recruiter where email = ? and password = ?";
+    
+    
+     try (PreparedStatement jobstmt = con.prepareStatement(jobseekerQuery);
+         PreparedStatement recruiterStmt = con.prepareStatement(recruiterQuery))
+         {
+         jobstmt.setString(1, uid);
+         jobstmt.setString(2, pwd);
+         recruiterStmt.setString(1, uid);
+         recruiterStmt.setString(2, pwd);
+         try(ResultSet rs=jobstmt.executeQuery()){
+         if(rs.next()){
+         response.sendRedirect("Internship.jsp");
+         return;
+            }
         }
-    }
+         try(ResultSet rs=recruiterStmt.executeQuery())
+         {
+         if(rs.next()){
+         response.sendRedirect("RecruiterDashboard.jsp");
+         return ;
+             }
+        }
+        response.sendRedirect("login.jsp?error=Invalid+Username+or+Password");
+        con.close();
+        }catch (SQLException e) {
+        e.printStackTrace();
+        response.sendRedirect("error.jsp"); // Handle database errors
+         }}catch(Exception ex){
+        System.out.println("ex");
+        }  
 
       out.write("\n");
       out.write("\n");
       out.write("    \n");
-      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>Login</title>\n");
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/Login.css\">\n");
+      out.write("         <link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap\" rel=\"stylesheet\">\n");
       out.write("         <style>\n");
       out.write("         \n");
       out.write("            body {\n");
@@ -212,6 +225,8 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("      </div>\n");
       out.write("      </div>\n");
+      out.write("    </form>\n");
+      out.write("     </div>\n");
       out.write("</body>\n");
       out.write("</html>\n");
       out.write("\n");

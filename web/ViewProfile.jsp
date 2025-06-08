@@ -60,9 +60,9 @@
         <link rel="stylesheet" type="text/css" href="css/viewProfile.css">
         <style>
               a {
-      color: white;
-      text-decoration: none;
-      }
+                color: white;
+                text-decoration: none;
+                }
         </style>
     </head>
     <body>

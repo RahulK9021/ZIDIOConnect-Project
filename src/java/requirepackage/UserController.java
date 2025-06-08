@@ -13,6 +13,7 @@ public class UserController {
      private ArrayList <UserLogin> userlist=new ArrayList<>();
      private ArrayList <Registration> reglist=new ArrayList<>();
      private ArrayList <ViewProfile> proflist =new ArrayList<>();
+     private ArrayList <Recruiter> reclist=new ArrayList<>();
     DBConnect dbc;
     ResultSet rs;
     String sql;
@@ -27,14 +28,112 @@ public class UserController {
          return true;  
      }
      
-     public boolean addRegistration(Registration obj){
-         sql="insert into userregisterationuserregisteration values('"+obj.getEmail()+"','"+obj.getPassword()+"','"+obj.getFullnm()+"',"+obj.getPhoneno()+",'"+obj.getDate()+"','"+obj.getGender()+"','"+obj.getAddress()+"','"+obj.getStatus()+"','"+obj.getType()+"')";
-         dbc.addRegistration(sql);
-         return true;
-     }
+    public boolean addUserRegistration(Registration obj) {
+    String sql = "INSERT INTO jobseeker (email, password, full_name, phone, dob, gender) VALUES (?, ?, ?, ?, ?, ?)";
+    try (Connection con = dbc.getConnection();
+     PreparedStatement ps = con.prepareStatement(sql)) {
+        
+        ps.setString(1, obj.getEmail());
+        ps.setString(2, obj.getPassword());
+        ps.setString(3, obj.getFullnm());
+        ps.setString(4, obj.getPhoneno());
+        ps.setDate(5, obj.getDate());   // java.sql.Date directly here
+        ps.setString(6, obj.getGender());
+
+        int rows = ps.executeUpdate();
+        System.out.println("Rows inserted: " + rows);
+        return rows > 0;
+       
+    } catch (SQLException e) {
+        e.printStackTrace();
+       
+    }
+     return false;
+    }
+
      public boolean addProfile(ViewProfile obj){
          sql="insert into viewprofile values('"+obj.getFnm()+"','"+obj.getFile()+"','"+obj.getEmail()+"','"+obj.getEducation()+"',"+obj.getPhone()+","+obj.getDob()+",'"+obj.getAddress()+"','"+obj.getType()+"','"+obj.getStatus()+"','"+obj.getLinkedin()+"','"+obj.getGithub()+"','"+obj.getPersonalwebsite()+"','"+obj.getJobtitle()+"','"+obj.getExcompany()+"','"+obj.getDuration()+"','"+obj.getSkills()+"','"+obj.getResponsibility()+"','"+obj.getExsalary()+"')";
          dbc.addProfile(sql);
          return true;
      }
+     
+     public boolean addRecruiter(Recruiter obj){
+        String sql = "INSERT INTO recruiter (email, password, full_name, comwebsite, comname, jobroll, skill, loc, deadline, salary, exp, des, post_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+ try{
+             Connection con=dbc.getConnection();
+             PreparedStatement ps=con.prepareStatement(sql);
+             ps.setString(1, obj.getRecemail());
+             ps.setString(2, obj.getRecpwd());
+             ps.setString(3, obj.getRecfnm());
+             ps.setString(4, obj.getComweb());
+              ps.setString(5, obj.getComnm());
+              ps.setString(6, obj.getJr());
+             ps.setString(7, obj.getSkill());
+             ps.setString(8, obj.getLoc());
+             ps.setDate(9, obj.getDeadline());
+             ps.setString(10, obj.getSalary());
+             ps.setString(11, obj.getExp());
+             ps.setString(12, obj.getDec());
+             ps.setString(13, obj.getPostType());
+             int row=ps.executeUpdate();
+             System.out.println("rows inserted"+row);
+             return row>0;
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+         return false;
+    }
+     
+     public ArrayList <Recruiter> getRecordsByPost(Recruiter obj){
+         String sql = "SELECT comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'";
+
+         reclist=new ArrayList <>();
+         try{
+         rs=dbc.getInternships(sql);
+        while(rs.next()){
+             Recruiter rec=new Recruiter();
+             rec.setComnm(rs.getString(1));
+             rec.setJr(rs.getString(2));
+             rec.setSkill(rs.getString(3));
+             rec.setLoc(rs.getString(4));
+             rec.setLoc(rs.getString(5));
+             rec.setDeadline(rs.getDate(6));
+             rec.setSalary(rs.getString(7));
+             rec.setExp(rs.getString(8));
+             rec.setDec(rs.getString(9));
+             reclist.add(rec);            
+         }
+         }catch(Exception ex){
+             System.out.println(ex );
+         }
+         return reclist;
+     }
+     
+     public ArrayList<Recruiter> getJobs(){
+         String sql="select comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='job'";
+         reclist=new ArrayList<>();
+         try{
+         rs=dbc.getJobs(sql);
+         while(rs.next()){
+             Recruiter rec=new Recruiter();
+             rec.setComnm(rs.getString(1));
+             rec.setJr(rs.getString(2));
+             rec.setSkill(rs.getString(3));
+             rec.setLoc(rs.getString(4));
+             rec.setDeadline(rs.getDate(5));
+             rec.setSalary(rs.getString(6));
+             rec.setExp(rs.getString(7));
+             rec.setDec(rs.getString(8));
+             reclist.add(rec);
+         }
+         }catch(Exception ex){
+             System.out.println(ex);
+         }
+         return reclist;
+     }
+//     public boolean addRecruiter(Recruiter obj){
+//         sql="insert into recruiter values('"+obj.getRecemail()+"','"+obj.getRecpwd()+"','"+obj.getRecfnm()+"','"+obj.getComweb()+"','"+obj.getComnm()+"','"+obj.getJr()+"','"+obj.getSkill()+"','"+obj.getLoc()+"',"+obj.getDeadline()+",'"+obj.getSalary()+"','"+obj.getExp()+"','"+obj.getDec()+"')";
+//         dbc.addRecruiter(sql);
+//         return true;
+//     }
 }
