@@ -63,7 +63,37 @@
                 color: white;
                 text-decoration: none;
                 }
+                .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                 background: linear-gradient(to right, #f6d365, #fda085);
+                color: white;
+                font-size: 16px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                margin-top: 10px;
+                align-items: center;
+              }
+
+              .btn:hover {
+                background-color: #45a049;
+              }
+
+              .btn:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(72, 180, 97, 0.4);
+              }
+
         </style>
+        <script>
+            function toggleExperience() {
+              event.preventDefault(); // Prevent form from submitting
+              var expFields = document.getElementById("experienceFields");
+              expFields.style.display = (expFields.style.display === "none" || expFields.style.display === "") ? "block" : "none";
+            }
+        </script>
     </head>
     <body>
          <div class="form-wrapper"> 
@@ -133,31 +163,31 @@
                      
                   </div><br>
                   <button class="btn" onclick="toggleExperience()">+ Add Experience</button><br>
-                  <div id="experienceFields" class="experience-fields"><br>
+                  <div id="experienceFields" class="experience-fields" style="display: none;"><br>
                       <div class="form-group"> 
                           <label for="jobTitle">Job Title</label>
                           <input type="text" name="jobtitle" placeholder="e.g., Software Engineer" />
-                      </div>
+                      </div><br>
                       <div class="form-group">
                           <label for="company">Ex-Company</label>
                           <input type="text" name="excompany" placeholder="e.g., Google" />
-                      </div>
+                      </div><br>
                       <div class="form-group">
                           <label for="duration">Duration</label> 
                           <input type="text" name="duration" placeholder="e.g., 2019 - 2023" />
-                      </div> 
+                      </div><br>
                       <div class="form-group"> 
                           <label for="skills">Key Skills</label>
                           <input type="text" name="skills" placeholder="e.g., JavaScript, React" />
-                      </div> 
+                      </div> <br>
                       <div class="form-group">
                           <label for="responsibilities">Responsibilities</label>
                           <textarea name="responsibilities" rows="3" placeholder="Brief description of your role..."></textarea> 
-                      </div>
+                      </div><br>
                       <div class="form-group">
                           <label for="salary">Ex-Company Salary</label>
                           <input type="text" name="salary" placeholder="e.g.,4 - 5 LPA" /> 
-                      </div> 
+                      </div> <br>
                   </div> 
                   <div class="form-footer">
                       <input type="submit" class="submit-btn" name="btnsub" value="Save Profile"/> 

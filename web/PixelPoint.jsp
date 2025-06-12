@@ -13,53 +13,7 @@
         <!--<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>-->
          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #4f46e5;
-      --secondary: #9333ea;
-      --light-bg: #f4f4f9;
-      --text-dark: #333;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--light-bg);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      padding: 5rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: auto;
-      margin-bottom: 100px;
-    }
-
-    header .wave {
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-    }
+ 
 
     nav {
       display: flex;
@@ -173,12 +127,7 @@
 
   
 
-  <header>
-    <h1>Innovate. Create. Elevate.</h1>
-    <p>VisionaryTech helps your business grow with cutting-edge digital solutions and creative strategies.</p>
-    <a href="#services" class="btn">Our Services</a>
-    <svg class="wave" viewBox="0 0 1440 320"><path fill="#f4f4f9" fill-opacity="1" d="M0,160L80,154.7C160,149,320,139,480,138.7C640,139,800,149,960,165.3C1120,181,1280,203,1360,213.3L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
-  </header>
+ 
     <section class="section">
          <h2>About Us</h2>
         <p>At the heart of <b> PixelPoint Inc.</b> is our mission to transform the future of technology by developing innovative solutions that address real-world challenges,

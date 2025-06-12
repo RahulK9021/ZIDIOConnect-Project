@@ -334,7 +334,7 @@ public final class Register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                   <input type=\"text\" name=\"jr\" placeholder=\"Frontend Intern\" />\n");
       out.write("               </div>\n");
       out.write("               <div class=\"form-group\">\n");
-      out.write("                   <label for=\"skill\">Required Skills:</label>\n");
+      out.write("                   <label for=\"skill\">Required Education :</label>\n");
       out.write("                   <input type=\"text\" name=\"skill\" placeholder=\"HTML, CSS, JS\" />\n");
       out.write("               </div>\n");
       out.write("               <div class=\"form-group\">\n");

@@ -1,3 +1,8 @@
+<%-- 
+    Document   : Login
+    Created on : Jun 8, 2025, 11:50:33 AM
+    Author     : Rahul
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="requirepackage.UserLogin" %>
@@ -5,57 +10,52 @@
 <%@page import="requirepackage.UserController" %>
 <%@page import="requirepackage.DBConnect" %>
 <%@page import="java.sql.*" %>
-
 <%
-    DBConnect dbc=new DBConnect();
-  String uid=request.getParameter("uid");
-  String pwd=request.getParameter("pwd");
-  try{
-    Connection con=dbc.getConnection();
-    String jobseekerQuery="select * from jobseeker where email = ? and password = ?";
-    String recruiterQuery="select * from recruiter where email = ? and password = ?";
-    
-    
-     try (PreparedStatement jobstmt = con.prepareStatement(jobseekerQuery);
-         PreparedStatement recruiterStmt = con.prepareStatement(recruiterQuery))
-         {
-         jobstmt.setString(1, uid);
-         jobstmt.setString(2, pwd);
-         recruiterStmt.setString(1, uid);
-         recruiterStmt.setString(2, pwd);
-         try(ResultSet rs=jobstmt.executeQuery()){
-         if(rs.next()){
-         response.sendRedirect("Internship.jsp");
-         return;
-            }
+  DBConnect dbc = new DBConnect();
+String uid = request.getParameter("uid");
+String pwd = request.getParameter("pwd");
+
+try (Connection con = dbc.getConnection();
+     PreparedStatement jobstmt = con.prepareStatement("SELECT * FROM jobseeker WHERE email = ? AND password = ?");
+     PreparedStatement recruiterStmt = con.prepareStatement("SELECT * FROM recruiter WHERE email = ? AND password = ?")) {
+
+    jobstmt.setString(1, uid);
+    jobstmt.setString(2, pwd);
+    recruiterStmt.setString(1, uid);
+    recruiterStmt.setString(2, pwd);
+
+    try (ResultSet rs = jobstmt.executeQuery()) {
+        if (rs.next()) {
+            response.sendRedirect(request.getContextPath() + "/Internship.jsp");
+
+            return;
         }
-         try(ResultSet rs=recruiterStmt.executeQuery())
-         {
-         if(rs.next()){
-         response.sendRedirect("RecruiterDashboard.jsp");
-         return ;
-             }
+    }
+
+    try (ResultSet rs = recruiterStmt.executeQuery()) {
+        if (rs.next()) {
+           response.sendRedirect(request.getContextPath() + "/RecruiterDashboard.jsp");
+
+            return;
         }
-        con.close();
-        }catch (SQLException e) {
-        e.printStackTrace();
-        response.sendRedirect("error.jsp"); // Handle database errors
-         }}catch(Exception ex){
-        System.out.println("ex");
-        }  
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+} catch (Exception ex) {
+    ex.printStackTrace();
+}
+  
 %>
 
-    
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
-        <link rel="stylesheet" type="text/css" href="css/Login.css">
-         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+        <title>Login Page</title>
+         <link rel="stylesheet" href="css/Login.css">
          <style>
-         
-            body {
+              body {
          display: flex;
          justify-content: center;
          align-items: center;
@@ -149,36 +149,34 @@
         padding: 1.5rem;
       }
     }
-    </style>
+
+             </style>
     </head>
-<body>
-     <div class="form-wrapper">
+    <body>
+       <div class="form-wrapper">
     <h1>Login</h1>
-    <form  method="POST">
-      <div class="form-grid">
-        
-        <div class="form-group">
-          <label for="uid">G-mail For Login</label>
-          <input type="email" name="uid" placeholder="User G-mail" required />
-        </div>
-          
-        <div class="form-group">
-          <label for="unm">Password</label>
-          <input type="password" name="pwd" placeholder="Password" required />
-        </div>
+    <form method="POST">
+        <div class="form-grid">
 
-        <div class="form-footer">
-            <input type="submit" class="submit-btn" name="btnsub" value="Login">
-         <div class="register">
-        <p>Don't have an account? <a href="Register.jsp">Register here</a></p>
-        </div>
+            <div class="form-group">
+                <label for="uid">G-mail For Login</label>
+                <input type="email" name="uid" placeholder="User G-mail" required />
+            </div>
 
-      </div>
-      </div>
+            <div class="form-group">
+                <label for="unm">Password</label>
+                <input type="password" name="pwd" placeholder="Password" required />
+            </div>
+
+            <div class="form-footer">
+                <input type="submit" class="submit-btn" name="btnsub" value="Login">
+                <div class="register">
+                    <p>Don't have an account? <a href="Register.jsp">Register here</a></p>
+                </div>
+
+            </div>
+        </div>
     </form>
-     </div>
-</body>
+</div>
+    </body>
 </html>
-
-   
-

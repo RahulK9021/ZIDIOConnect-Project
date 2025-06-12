@@ -1,4 +1,4 @@
-package org.apache.jsp;
+package org.apache.jsp.images;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -70,24 +70,22 @@ try (Connection con = dbc.getConnection();
 
     try (ResultSet rs = jobstmt.executeQuery()) {
         if (rs.next()) {
-            response.sendRedirect("Internship.jsp");
+            response.sendRedirect(request.getContextPath() + "/Internship.jsp");
+
             return;
         }
     }
 
     try (ResultSet rs = recruiterStmt.executeQuery()) {
         if (rs.next()) {
-            response.sendRedirect("RecruiterDashboard.jsp");
+           response.sendRedirect(request.getContextPath() + "/RecruiterDashboard.jsp");
+
             return;
         }
     }
 
-    // If no match found
-    response.sendRedirect("login.jsp?error=invalid");
-
 } catch (SQLException e) {
     e.printStackTrace();
-    response.sendRedirect("error.jsp");
 } catch (Exception ex) {
     ex.printStackTrace();
 }
@@ -95,17 +93,14 @@ try (Connection con = dbc.getConnection();
 
       out.write("\n");
       out.write("\n");
-      out.write("    \n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>Login</title>\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/Login.css\">\n");
-      out.write("         <link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap\" rel=\"stylesheet\">\n");
+      out.write("        <title>Login Page</title>\n");
+      out.write("         <link rel=\"stylesheet\" href=\"css/Login.css\">\n");
       out.write("         <style>\n");
-      out.write("         \n");
-      out.write("            body {\n");
+      out.write("              body {\n");
       out.write("         display: flex;\n");
       out.write("         justify-content: center;\n");
       out.write("         align-items: center;\n");
@@ -199,39 +194,37 @@ try (Connection con = dbc.getConnection();
       out.write("        padding: 1.5rem;\n");
       out.write("      }\n");
       out.write("    }\n");
-      out.write("    </style>\n");
+      out.write("\n");
+      out.write("             </style>\n");
       out.write("    </head>\n");
-      out.write("<body>\n");
-      out.write("     <div class=\"form-wrapper\">\n");
+      out.write("    <body>\n");
+      out.write("       <div class=\"form-wrapper\">\n");
       out.write("    <h1>Login</h1>\n");
-      out.write("    <form  method=\"POST\">\n");
-      out.write("      <div class=\"form-grid\">\n");
-      out.write("        \n");
-      out.write("        <div class=\"form-group\">\n");
-      out.write("          <label for=\"uid\">G-mail For Login</label>\n");
-      out.write("          <input type=\"email\" name=\"uid\" placeholder=\"User G-mail\" required />\n");
-      out.write("        </div>\n");
-      out.write("          \n");
-      out.write("        <div class=\"form-group\">\n");
-      out.write("          <label for=\"unm\">Password</label>\n");
-      out.write("          <input type=\"password\" name=\"pwd\" placeholder=\"Password\" required />\n");
-      out.write("        </div>\n");
+      out.write("    <form method=\"POST\">\n");
+      out.write("        <div class=\"form-grid\">\n");
       out.write("\n");
-      out.write("        <div class=\"form-footer\">\n");
-      out.write("            <input type=\"submit\" class=\"submit-btn\" name=\"btnsub\" value=\"Login\">\n");
-      out.write("         <div class=\"register\">\n");
-      out.write("        <p>Don't have an account? <a href=\"Register.jsp\">Register here</a></p>\n");
-      out.write("        </div>\n");
+      out.write("            <div class=\"form-group\">\n");
+      out.write("                <label for=\"uid\">G-mail For Login</label>\n");
+      out.write("                <input type=\"email\" name=\"uid\" placeholder=\"User G-mail\" required />\n");
+      out.write("            </div>\n");
       out.write("\n");
-      out.write("      </div>\n");
-      out.write("      </div>\n");
+      out.write("            <div class=\"form-group\">\n");
+      out.write("                <label for=\"unm\">Password</label>\n");
+      out.write("                <input type=\"password\" name=\"pwd\" placeholder=\"Password\" required />\n");
+      out.write("            </div>\n");
+      out.write("\n");
+      out.write("            <div class=\"form-footer\">\n");
+      out.write("                <input type=\"submit\" class=\"submit-btn\" name=\"btnsub\" value=\"Login\">\n");
+      out.write("                <div class=\"register\">\n");
+      out.write("                    <p>Don't have an account? <a href=\"Register.jsp\">Register here</a></p>\n");
+      out.write("                </div>\n");
+      out.write("\n");
+      out.write("            </div>\n");
+      out.write("        </div>\n");
       out.write("    </form>\n");
-      out.write("     </div>\n");
-      out.write("</body>\n");
+      out.write("</div>\n");
+      out.write("    </body>\n");
       out.write("</html>\n");
-      out.write("\n");
-      out.write("   \n");
-      out.write("\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

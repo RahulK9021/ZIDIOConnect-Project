@@ -288,7 +288,7 @@ window.onload = function () {
                    <input type="text" name="jr" placeholder="Frontend Intern" />
                </div>
                <div class="form-group">
-                   <label for="skill">Required Skills:</label>
+                   <label for="skill">Required Education :</label>
                    <input type="text" name="skill" placeholder="HTML, CSS, JS" />
                </div>
                <div class="form-group">

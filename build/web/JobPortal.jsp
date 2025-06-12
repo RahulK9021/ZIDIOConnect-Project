@@ -21,9 +21,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Job Portal</title>
-        <!--<link rel="stylesheet" href="css/JobPortal.css">-->
-         <style>
-         :root {
+    <style>
+     :root {
       --primary: #00b894;
       --accent: #0984e3;
       --bg: #f0f2f5;
@@ -31,7 +30,7 @@
       --card: #fff;
     }
 
-    * {
+       * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -43,37 +42,13 @@
       color: var(--text);
     }
 
-    nav {
-      background: var(--primary);
-      padding: 1rem 2rem;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    nav .logo {
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    nav ul {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
     header {
-      padding: 4rem 2rem;
-      text-align: center;
       background: linear-gradient(to right, var(--primary), var(--accent));
       color: white;
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     header h1 {
@@ -83,8 +58,16 @@
 
     header p {
       font-size: 1.2rem;
-      max-width: 600px;
+      max-width: 800px;
       margin: auto;
+      margin-bottom: 100px;
+    }
+
+    header .wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
     }
     .section {
       padding: 4rem 2rem;
@@ -92,7 +75,7 @@
       margin: auto;
     }
 
-    .section h2 {
+    .section h4 {
       text-align: center;
       margin-bottom: 2rem;
       font-size: 2rem;
@@ -111,15 +94,13 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       transition: transform 0.3s ease;
+       margin: 8px 0;
+        color: #333;
+        font-size: 15px;
     }
 
     .card:hover {
       transform: translateY(-5px);
-    }
-
-    .card h3 {
-      margin-bottom: 0.5rem;
-      color: var(--secondary);
     }
 
     .card p {
@@ -127,26 +108,26 @@
       color: #555;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.6rem 1.5rem;
-      background: var(--primary);
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s;
+    .apply-btn {
+    display: inline-block;
+    margin-top: 15px;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
     }
 
-    .btn:hover {
-      background: var(--secondary);
+   .apply-btn:hover {
+    background: linear-gradient(90deg, #0072ff, #0056d2);
     }
 
     .cta {
       text-align: center;
       background: #ffffff;
-      padding: 4rem 2rem;
+      padding: 2rem 1rem;
       margin-top: 4rem;
       border-radius: 12px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.05);
@@ -168,54 +149,130 @@
         flex-direction: column;
         gap: 1rem;
       }
+      
+    }
+    /* Navbar Styling */
+    .navbar {
+      width: 100%;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /*max-width: 1200px;*/
+      padding: 0.8rem 2rem;
+      margin: auto;
+      margin-right: 10px;
+    }
+
+    .logo {
+      color: white;
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-right: 500px
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffeb3b;
+    }
+
+    .card h3 {
+      font-size: 24px;
+      color: #0072ff;
+      margin-bottom: 15px;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    }
+    .card p {
+      margin: 8px 0;
+      color: #333;
+      font-size: 15px;
+    }
+     .btn{
+        padding: 10px;
+        margin: 10px;
+        text-decoration: none;
+        border: 1px solid black;
+        color: white;
     }
     </style>
     </head>
-    <nav>
-           <div class="logo">< ZIDIOConnect ></div>
-           <ul>
-            
-             <li><a href="Internship.jsp">Internship Portal</a></li>
-             <li><a href="ViewProfile.jsp">View Profile</a></li>
-           </ul>
-         </nav>
+     <header>
+    <h1>"Your career, our commitment." </h1>
+    <p>ZIDIOConnect Helps You To Unlock Your Career Potential !! <br> Because we believe in<i> <b> Talent Deserves Recognition</b> </i></p>
+    <a href="#services" class="btn">Our Services</a>
+    <svg class="wave" viewBox="0 0 1440 320"><path fill="#f4f4f9" fill-opacity="1" d="M0,160L80,154.7C160,149,320,139,480,138.7C640,139,800,149,960,165.3C1120,181,1280,203,1360,213.3L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
+  </header>
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">< ZIDIOConnect ></div>
+    <ul class="nav-links">
+      
+      <li><a href="Internship.jsp">Internship Portal</a></li>
+      <li><a href="ViewProfile.jsp">Update Profile</a></li>
+      
+    </ul>
+  </div>
+</nav>
 
-         <header>
-           <h1>Discover Jobs Around You</h1>
-           <p>“Professional Opportunities at Your Fingertips”</p>
-         </header>
-  <section id="internships" class="section">
-           <h2>Latest Jobs For You</h2>
-           <div class="jobs">
-             <div class="card">
-                 <% 
-                    while (rs.next())
-                 {
-                 %>
-                 <h3>Java Developer </h3>
-                 <p><b>🚀 Company :</b><%= rs.getString(1) %><br></p>
-                    <p> <b>  Job Role :</b><%=rs.getString(2) %><br></p>
-                    <p>  <b>🎯 Skills : </b><%=rs.getString(3)%> <br> </p>
-                    <p> <b> Location :</b> <%=rs.getString(4) %> <br></p>
-                    <p>  <b> Deadline :</b> <%= rs.getString(5) %></p>
-                 <p><b>  &nbsp;    ₹   Salary :</b><%=rs.getString(6)%></p>
-                  <p><b>🕒 Experience :</b><%=rs.getString(7) %><br></p>
-                   <p>  💼 <b> Description: :</b><%=rs.getString(8) %><br></p>
-               <a href="#" class="btn">Apply Now</a>
-             </div>
-                 <%
-                     }
-                     %>
-           </div>
-         </section>
+<section id="internships" class="section">
+  <h2>Latest Jobs For You</h2>
+  <div class="internships">
+       
+   <%
+ try {
+     while (rs != null && rs.next()) {
+%>
+    <div class="card">
+        <h3><%= rs.getString(2) %></h3>
+        <p><b>🚀 Company:</b> <%= rs.getString(1) %></p>
+        <p><b>🎯 Job Role:</b> <%= rs.getString(2) %></p>
+        <p><b>🛠 Skills:</b> <%= rs.getString(3) %></p>
+        <p><b>📍 Location:</b> <%= rs.getString(4) %></p>
+        <p><b>⏳ Deadline:</b> <%= rs.getString(5) %></p>
+        <p><b>💰 Salary:</b> ₹<%= rs.getString(6) %></p>
+        <p><b>🕒 Experience:</b> <%= rs.getString(7) %></p>
+        <p><b>💼 Description:</b> <%= rs.getString(8) %></p>
+        <a href="#" class="apply-btn">Apply Now</a>
+    </div>
+<%
+     }
+ } catch (Exception e) {
+     out.println("Error in ResultSet Loop: " + e.getMessage());
+     e.printStackTrace(new java.io.PrintWriter(out));
+ }
+%>
+  </div>
+</section>
 
          <section id="apply" class="section cta">
-           <h2>For Students & Companies</h2>
-           <p>🌟 Students:Apply to top internships and boost your resume.<br>
-           🏢 Companies: Post internships and discover amazing talent.</p>
-           <a href="#" class="btn">Join as Student</a>
-           <a href="#" class="btn" style="background:#6610f2; margin-left: 1rem;">Join as Company</a>
+           <h4> Post jobs and get Talented Employees.<br>Start with ZIDIOConnect Today !!!</h4>
+           <a href="Register.jsp" class="btn" style="background:#6610f2; margin-left: 1rem;">Join as Company</a>
          </section>
+
 
          <footer id="contact">
            <p>📧 Email: support@zidioconnect.com | 📞 +1 (800) 123-4567</p>
