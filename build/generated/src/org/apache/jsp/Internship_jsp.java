@@ -57,7 +57,7 @@ public final class Internship_jsp extends org.apache.jasper.runtime.HttpJspBase
 
     DBConnect dbc=new DBConnect();
     UserController utc = new UserController();
-    ResultSet rs=dbc.getInternships("SELECT comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");  
+    ResultSet rs=dbc.getInternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");  
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -279,7 +279,9 @@ public final class Internship_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <div class=\"logo\">< ZIDIOConnect ></div>\n");
       out.write("    <ul class=\"nav-links\">\n");
       out.write("      \n");
-      out.write("      <li><a href=\"JobPortal.jsp\">Job Portal</a></li>\n");
+      out.write("      <li><a href=\"");
+      out.print( request.getContextPath() );
+      out.write("/JobPortal.jsp\">Job Portal</a></li>\n");
       out.write("      <li><a href=\"ViewProfile.jsp\">Update Profile</a></li>\n");
       out.write("      \n");
       out.write("    </ul>\n");
@@ -291,50 +293,53 @@ public final class Internship_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("           <div class=\"internships\">\n");
       out.write("               ");
 
+                  if(rs != null){
                   while(rs.next())
-                  {
+                 {
                 
       out.write("\n");
       out.write("             <div class=\"card\">\n");
       out.write("                <h3> ");
-      out.print( rs.getString(2) );
+      out.print( rs.getString(4) );
       out.write("</h3>\n");
       out.write("        <p><b>🚀 Company :</b> ");
-      out.print( rs.getString(1) );
-      out.write("</p>\n");
-      out.write("        <p><b>🎯 Job Role :</b> ");
-      out.print( rs.getString(2) );
-      out.write("</p>\n");
-      out.write("        <p><b>🛠 Skills :</b> ");
       out.print( rs.getString(3) );
       out.write("</p>\n");
-      out.write("        <p><b>📍 Location :</b> ");
+      out.write("        <p><b>🎯 Job Role :</b> ");
       out.print( rs.getString(4) );
       out.write("</p>\n");
-      out.write("        <p><b>⏳ Deadline:</b> ");
+      out.write("        <p><b>🛠 Skills :</b> ");
       out.print( rs.getString(5) );
       out.write("</p>\n");
-      out.write("        <p><b>💰 Stipend :</b> ₹");
+      out.write("        <p><b>📍 Location :</b> ");
       out.print( rs.getString(6) );
       out.write("</p>\n");
-      out.write("        <p><b>🕒 Duration :</b> ");
+      out.write("        <p><b>⏳ Deadline:</b> ");
       out.print( rs.getString(7) );
       out.write("</p>\n");
-      out.write("        <p><b>💼 what Will You Learn :</b> ");
+      out.write("        <p><b>💰 Stipend :</b> ₹");
       out.print( rs.getString(8) );
       out.write("</p>\n");
-      out.write("        <a href=\"#\" class=\"apply-btn\">Apply Now</a>\n");
+      out.write("        <p><b>🕒 Duration :</b> ");
+      out.print( rs.getString(9) );
+      out.write("</p>\n");
+      out.write("        <p><b>💼 what Will You Learn :</b> ");
+      out.print( rs.getString(10) );
+      out.write("</p>\n");
+      out.write("       <a href=\"Apply.jsp?job_id=");
+      out.print( rs.getString("id") );
+      out.write("&recruiter_email=");
+      out.print( rs.getString("recruiter_email") );
+      out.write("&post_type=internship\" class=\"apply-btn\">Apply Now</a>\n");
+      out.write("             </div>\n");
       out.write("          ");
 
              }
+            }
          
       out.write("\n");
       out.write("      </div>\n");
-      out.write("      \n");
-      out.write("               \n");
-      out.write("               \n");
-      out.write("              \n");
-      out.write("         </section>\n");
+      out.write("      </section>\n");
       out.write("\n");
       out.write("         <section id=\"apply\" class=\"section cta\">\n");
       out.write("           <h4> Post internships and discover amazing talent.<br>Start with ZIDIOConnect Today !!!</h4>\n");

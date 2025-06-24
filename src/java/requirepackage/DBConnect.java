@@ -81,5 +81,14 @@ public class DBConnect {
         }
         return rs;
     }
+    public ResultSet getApplicants(String sql){
+        try{
+            stmt=cn.createStatement();
+            rs=stmt.executeQuery(sql);
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return rs;
+    }
    
 }

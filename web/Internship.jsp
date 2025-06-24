@@ -13,7 +13,7 @@
 <%
     DBConnect dbc=new DBConnect();
     UserController utc = new UserController();
-    ResultSet rs=dbc.getInternships("SELECT comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");  
+    ResultSet rs=dbc.getInternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");  
 %>
 <!DOCTYPE html>
 <html>
@@ -234,7 +234,7 @@
     <div class="logo">< ZIDIOConnect ></div>
     <ul class="nav-links">
       
-      <li><a href="JobPortal.jsp">Job Portal</a></li>
+      <li><a href="<%= request.getContextPath() %>/JobPortal.jsp">Job Portal</a></li>
       <li><a href="ViewProfile.jsp">Update Profile</a></li>
       
     </ul>
@@ -245,29 +245,28 @@
            <h2>Latest Internships</h2>
            <div class="internships">
                <%
+                  if(rs != null){
                   while(rs.next())
-                  {
+                 {
                 %>
              <div class="card">
-                <h3> <%= rs.getString(2) %></h3>
-        <p><b>🚀 Company :</b> <%= rs.getString(1) %></p>
-        <p><b>🎯 Job Role :</b> <%= rs.getString(2) %></p>
-        <p><b>🛠 Skills :</b> <%= rs.getString(3) %></p>
-        <p><b>📍 Location :</b> <%= rs.getString(4) %></p>
-        <p><b>⏳ Deadline:</b> <%= rs.getString(5) %></p>
-        <p><b>💰 Stipend :</b> ₹<%= rs.getString(6) %></p>
-        <p><b>🕒 Duration :</b> <%= rs.getString(7) %></p>
-        <p><b>💼 what Will You Learn :</b> <%= rs.getString(8) %></p>
-        <a href="#" class="apply-btn">Apply Now</a>
-        
-      </div>
-        <%
+                <h3> <%= rs.getString(4) %></h3>
+        <p><b>🚀 Company :</b> <%= rs.getString(3) %></p>
+        <p><b>🎯 Job Role :</b> <%= rs.getString(4) %></p>
+        <p><b>🛠 Skills :</b> <%= rs.getString(5) %></p>
+        <p><b>📍 Location :</b> <%= rs.getString(6) %></p>
+        <p><b>⏳ Deadline:</b> <%= rs.getString(7) %></p>
+        <p><b>💰 Stipend :</b> ₹<%= rs.getString(8) %></p>
+        <p><b>🕒 Duration :</b> <%= rs.getString(9) %></p>
+        <p><b>💼 what Will You Learn :</b> <%= rs.getString(10) %></p>
+       <a href="Apply.jsp?job_id=<%= rs.getString("id") %>&recruiter_email=<%= rs.getString("recruiter_email") %>&post_type=internship" class="apply-btn">Apply Now</a>
+             </div>
+          <%
              }
+            }
          %>
-               
-               
-              
-         </section>
+      </div>
+      </section>
 
          <section id="apply" class="section cta">
            <h4> Post internships and discover amazing talent.<br>Start with ZIDIOConnect Today !!!</h4>

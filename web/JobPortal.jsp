@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@page import="requirepackage.DBConnect" %>
 <%@page import="requirepackage.Registration" %>
 <%@page import="requirepackage.UserController" %>
@@ -14,9 +13,10 @@
 <%
   DBConnect dbc=new DBConnect();
   UserController utc=new UserController();
-  ResultSet rs=dbc.getJobs("select comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='job'");
+  ResultSet rs=dbc.getJobs("select id, recruiter_email, comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='job'");
     
 %>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -242,29 +242,23 @@
   <h2>Latest Jobs For You</h2>
   <div class="internships">
        
-   <%
- try {
-     while (rs != null && rs.next()) {
-%>
+    <%
+     while (rs.next())
+    {
+    %>
     <div class="card">
-        <h3><%= rs.getString(2) %></h3>
-        <p><b>🚀 Company:</b> <%= rs.getString(1) %></p>
-        <p><b>🎯 Job Role:</b> <%= rs.getString(2) %></p>
-        <p><b>🛠 Skills:</b> <%= rs.getString(3) %></p>
-        <p><b>📍 Location:</b> <%= rs.getString(4) %></p>
-        <p><b>⏳ Deadline:</b> <%= rs.getString(5) %></p>
-        <p><b>💰 Salary:</b> ₹<%= rs.getString(6) %></p>
-        <p><b>🕒 Experience:</b> <%= rs.getString(7) %></p>
-        <p><b>💼 Description:</b> <%= rs.getString(8) %></p>
-        <a href="#" class="apply-btn">Apply Now</a>
-    </div>
-<%
-     }
- } catch (Exception e) {
-     out.println("Error in ResultSet Loop: " + e.getMessage());
-     e.printStackTrace(new java.io.PrintWriter(out));
- }
-%>
+        <h3> <%= rs.getString(4) %></h3>
+        <p><b>🚀 Company:</b> <%= rs.getString(3) %></p>
+        <p><b>🎯 Job Role:</b> <%= rs.getString(4) %></p>
+        <p><b>🛠 Skills:</b> <%= rs.getString(5) %></p>
+        <p><b>📍 Location:</b> <%= rs.getString(6) %></p>
+        <p><b>⏳ Deadline:</b> <%= rs.getString(7) %></p>
+        <p><b>💰 Salary:</b> ₹<%= rs.getString(8) %></p>
+        <p><b>🕒 Experience:</b> <%= rs.getString(9) %></p>
+        <p><b>💼 Description:</b> <%= rs.getString(10) %></p>
+        <a href="Apply.jsp?job_id=<%= rs.getString("id") %>&recruiter_email=<%= rs.getString("recruiter_email") %>&post_type=job" class="apply-btn">Apply Now</a>
+  </div>
+    <% } %>
   </div>
 </section>
 
@@ -272,9 +266,7 @@
            <h4> Post jobs and get Talented Employees.<br>Start with ZIDIOConnect Today !!!</h4>
            <a href="Register.jsp" class="btn" style="background:#6610f2; margin-left: 1rem;">Join as Company</a>
          </section>
-
-
-         <footer id="contact">
+ <footer id="contact">
            <p>📧 Email: support@zidioconnect.com | 📞 +1 (800) 123-4567</p>
            <p>© 2025 ZIDIOConnect. All rights reserved.</p>
          </footer>

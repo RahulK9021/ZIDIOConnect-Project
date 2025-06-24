@@ -49,7 +49,6 @@ public final class JobPortal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("<!DOCTYPE html>\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -58,10 +57,11 @@ public final class JobPortal_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   DBConnect dbc=new DBConnect();
   UserController utc=new UserController();
-  ResultSet rs=dbc.getJobs("select comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='job'");
+  ResultSet rs=dbc.getJobs("select id, recruiter_email, comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='job'");
     
 
       out.write("\n");
+      out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
@@ -287,49 +287,48 @@ public final class JobPortal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("  <h2>Latest Jobs For You</h2>\n");
       out.write("  <div class=\"internships\">\n");
       out.write("       \n");
-      out.write("   ");
+      out.write("    ");
 
- try {
-     while (rs != null && rs.next()) {
-
+     while (rs.next())
+    {
+    
       out.write("\n");
       out.write("    <div class=\"card\">\n");
-      out.write("        <h3>");
-      out.print( rs.getString(2) );
+      out.write("        <h3> ");
+      out.print( rs.getString(4) );
       out.write("</h3>\n");
       out.write("        <p><b>🚀 Company:</b> ");
-      out.print( rs.getString(1) );
-      out.write("</p>\n");
-      out.write("        <p><b>🎯 Job Role:</b> ");
-      out.print( rs.getString(2) );
-      out.write("</p>\n");
-      out.write("        <p><b>🛠 Skills:</b> ");
       out.print( rs.getString(3) );
       out.write("</p>\n");
-      out.write("        <p><b>📍 Location:</b> ");
+      out.write("        <p><b>🎯 Job Role:</b> ");
       out.print( rs.getString(4) );
       out.write("</p>\n");
-      out.write("        <p><b>⏳ Deadline:</b> ");
+      out.write("        <p><b>🛠 Skills:</b> ");
       out.print( rs.getString(5) );
       out.write("</p>\n");
-      out.write("        <p><b>💰 Salary:</b> ₹");
+      out.write("        <p><b>📍 Location:</b> ");
       out.print( rs.getString(6) );
       out.write("</p>\n");
-      out.write("        <p><b>🕒 Experience:</b> ");
+      out.write("        <p><b>⏳ Deadline:</b> ");
       out.print( rs.getString(7) );
       out.write("</p>\n");
-      out.write("        <p><b>💼 Description:</b> ");
+      out.write("        <p><b>💰 Salary:</b> ₹");
       out.print( rs.getString(8) );
       out.write("</p>\n");
-      out.write("        <a href=\"#\" class=\"apply-btn\">Apply Now</a>\n");
-      out.write("    </div>\n");
-
-     }
- } catch (Exception e) {
-     out.println("Error in ResultSet Loop: " + e.getMessage());
-     e.printStackTrace(new java.io.PrintWriter(out));
- }
-
+      out.write("        <p><b>🕒 Experience:</b> ");
+      out.print( rs.getString(9) );
+      out.write("</p>\n");
+      out.write("        <p><b>💼 Description:</b> ");
+      out.print( rs.getString(10) );
+      out.write("</p>\n");
+      out.write("        <a href=\"Apply.jsp?job_id=");
+      out.print( rs.getString("id") );
+      out.write("&recruiter_email=");
+      out.print( rs.getString("recruiter_email") );
+      out.write("&post_type=job\" class=\"apply-btn\">Apply Now</a>\n");
+      out.write("  </div>\n");
+      out.write("    ");
+ } 
       out.write("\n");
       out.write("  </div>\n");
       out.write("</section>\n");
@@ -338,9 +337,7 @@ public final class JobPortal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("           <h4> Post jobs and get Talented Employees.<br>Start with ZIDIOConnect Today !!!</h4>\n");
       out.write("           <a href=\"Register.jsp\" class=\"btn\" style=\"background:#6610f2; margin-left: 1rem;\">Join as Company</a>\n");
       out.write("         </section>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("         <footer id=\"contact\">\n");
+      out.write(" <footer id=\"contact\">\n");
       out.write("           <p>📧 Email: support@zidioconnect.com | 📞 +1 (800) 123-4567</p>\n");
       out.write("           <p>© 2025 ZIDIOConnect. All rights reserved.</p>\n");
       out.write("         </footer>\n");

@@ -116,25 +116,13 @@ button:hover {
   margin-left: -3px;
   top: 0;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
   </style>
     </head>
     <body>
-
-  
-
-  <!-- Navbar -->
-  <!-- <nav class="navbar">
-    <div class="container">
-      <h1 class="logo">JobConnect</h1>
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-  </nav> -->
-
-  <!-- Hero Section -->
    <header>
     <h1>Unleash Your Potential With ZIDIOConnect</h1>
      <b>We connect talent with opportunity — globally.</b><br>
@@ -162,30 +150,27 @@ button:hover {
   <div class="testimonial">
       At <b>ZIDIOConnect </b>, we believe in meaningful employment. Our platform helps professionals find the right job and enables companies to discover top talent. With advanced matching algorithms and a human-centered approach, we stand as a reliable bridge between job seekers and employers.
       Provides <b>internships</b> for growing your knowledge , and also give the platform to talented candidates to search a <b>job</b>.
-
   </div>
-
   </section>
-  
   <section class="testimonials">
     <h2>What Our Users Say</h2>
     <div class="testimonial">
-      "Thanks to DreamJob, I found a job I love in just two weeks!" – <strong>Sarah T.</strong>
+      "Thanks to DreamJob, I found a job I love in just two weeks!" – <strong>Gourav Gaikwad</strong>
     </div>
     <div class="testimonial">
-      "The platform is super easy to use and has tons of real opportunities." – <strong>James R.</strong>
+      "The platform is super easy to use and has tons of real opportunities." – <strong>Ashish P</strong>
     </div>
   </section>
   <form action="Register.jsp">
- 
     <div class="cta-banner">
-        Join Thousands Building Their Future – <button class="btn">Sign Up Today !!</button>
-  </div>
-
+        Join Thousands Building Their Future  <br><button class="btn">Sign Up Today !!</button> <button><a href="Login.jsp"> Login !!</a></button>
+    </div>
+      
+        
+   
   <footer>
     &copy; 2025 ZIDIOConnect. All rights reserved.
   </footer>
-
 </body>
 </html>
 
