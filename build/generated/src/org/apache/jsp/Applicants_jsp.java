@@ -52,6 +52,13 @@ public final class Applicants_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+
+if (session.getAttribute("recruiterEmail") == null) {
+    response.sendRedirect("Login.jsp");
+    return;
+}
+
+      out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
@@ -107,6 +114,8 @@ public final class Applicants_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <table class=\"table-applicants\">\n");
       out.write("                    <thead>\n");
       out.write("                        <tr>\n");
+      out.write("                            <th>Applied for</th>\n");
+      out.write("                            <th>Post</th>\n");
       out.write("                            <th>Candidate Email</th>\n");
       out.write("                            <th>Full Name</th>\n");
       out.write("                            <th>Resume</th>\n");
@@ -150,7 +159,7 @@ public final class Applicants_jsp extends org.apache.jasper.runtime.HttpJspBase
                         try {
                             DBConnect dbc = new DBConnect();
                             conn = dbc.getConnection();
-                            String postsSql = "SELECT candidate_email, fullname, resume, education, phoneno, gender, linkedin, github, pwebsite, jobtitile, excomapny, duration, skills, responsibility, exsalary FROM recruiter_inbox WHERE recruiter_email = ?";
+                            String postsSql = "SELECT candidate_email,post_type, fullname, resume, education, phoneno, gender, linkedin, github, pwebsite, jobtitile, excomapny, duration, skills, responsibility, exsalary FROM recruiter_inbox WHERE recruiter_email = ?";
                             pstmt = conn.prepareStatement(postsSql);
                             pstmt.setString(1, recruiterEmail);
                             rs = pstmt.executeQuery();
@@ -158,6 +167,7 @@ public final class Applicants_jsp extends org.apache.jasper.runtime.HttpJspBase
                             while (rs.next()) {
                                 hasApplicants = true;
                                 String candidate_email = rs.getString("candidate_email") != null ? rs.getString("candidate_email") : "Not specified";
+                                String post_type = rs.getString("post_type") != null ? rs.getString("post_type") : "Not specified";
                                 String fullname = rs.getString("fullname") != null ? rs.getString("fullname") : "Not specified";
                                 String resume = rs.getString("resume") != null ? rs.getString("resume") : "";
                                 String education = rs.getString("education") != null ? rs.getString("education") : "Not specified";
@@ -181,8 +191,15 @@ public final class Applicants_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                        <tr>\n");
       out.write("                            <td>");
+      out.print( jobtitile);
+      out.write("</td>\n");
+      out.write("                             <td>");
+      out.print( post_type );
+      out.write("</td>\n");
+      out.write("                            <td>");
       out.print( candidate_email );
       out.write("</td>\n");
+      out.write("                           \n");
       out.write("                            <td>");
       out.print( fullname );
       out.write("</td>\n");

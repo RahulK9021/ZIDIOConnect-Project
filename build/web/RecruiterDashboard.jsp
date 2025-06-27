@@ -400,11 +400,7 @@ a{
 <%
     }
 %>
-
-
-
-                
-                <%
+<%
                     }
                     
                     if (!hasPosts) {
@@ -443,7 +439,7 @@ a{
         function editPost(id) {
             // You can redirect to an edit page or show a modal
             alert('Edit functionality - redirect to EditPost.jsp?id=' + id);
-            // window.location.href = 'EditPost.jsp?id=' + id;
+             window.location.href = 'EditPost.jsp?id=' + id;
         }
     </script>
 </body>

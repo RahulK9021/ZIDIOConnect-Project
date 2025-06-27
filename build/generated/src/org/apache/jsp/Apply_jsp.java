@@ -47,6 +47,8 @@ public final class Apply_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write('\n');
+      out.write('\n');
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -135,7 +137,7 @@ public final class Apply_jsp extends org.apache.jasper.runtime.HttpJspBase
                 // Continue with profile retrieval and application submission
                 profileStmt = conn.prepareStatement(
                     "SELECT fullname, resume, education, phoneno, address, gender, " +
-                    "linkedin, github, pwebsite, jobtitile, excompany, duration, " +
+                    "linkedin, github, pwebsite, jobtitile, excomapny, duration, " +
                     "skills, responsibility, exsalary FROM viewprofile WHERE email = ?"
                 );
                 profileStmt.setString(1, userEmail);
@@ -158,8 +160,8 @@ public final class Apply_jsp extends org.apache.jasper.runtime.HttpJspBase
                         insertStmt = conn.prepareStatement(
                             "INSERT INTO recruiter_inbox (recruiter_email, candidate_email, job_id, post_type, " +
                             "fullname, resume, education, phoneno, address, gender, linkedin, github, " +
-                            "pwebsite, jobtitile, excompany, duration, skills, responsibility, exsalary, " +
-                            "application_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'PENDING')"
+                            "pwebsite, jobtitile, excomapny, duration, skills, responsibility, exsalary, " +
+                            "application_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())"
                         );
                         
                         insertStmt.setString(1, recruiterEmail);
@@ -176,7 +178,7 @@ public final class Apply_jsp extends org.apache.jasper.runtime.HttpJspBase
                         insertStmt.setString(12, rs.getString("github"));
                         insertStmt.setString(13, rs.getString("pwebsite"));
                         insertStmt.setString(14, rs.getString("jobtitile"));
-                        insertStmt.setString(15, rs.getString("excompany"));
+                        insertStmt.setString(15, rs.getString("excomapny"));
                         insertStmt.setString(16, rs.getString("duration"));
                         insertStmt.setString(17, rs.getString("skills"));
                         insertStmt.setString(18, rs.getString("responsibility"));
@@ -285,7 +287,7 @@ public final class Apply_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <p>Please wait while we submit your application.</p>\n");
       out.write("    </div>\n");
       out.write("</body>\n");
-      out.write("</html>");
+      out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

@@ -1,9 +1,6 @@
-<%-- 
-    Document   : Apply
-    Created on : Jun 13, 2025, 11:47:38?AM
-    Author     : Rahul
---%>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ page import="requirepackage.DBConnect" %>
 <%@ page import="java.sql.*, java.util.*" %>
@@ -90,7 +87,7 @@
 %>
                         <script>
                             alert('Please complete your profile before applying!');
-                            location.href = 'profile.jsp';
+                            location.href = 'ViewProfile.jsp';
                         </script>
 <%
                     } else {
@@ -125,7 +122,7 @@
                         int rows = insertStmt.executeUpdate();
                         
                         if (rows > 0) {
-                            String successRedirect = "internship".equalsIgnoreCase(postType) ? "Internship.jsp" : "Jobs.jsp";
+                            String successRedirect = "internship".equalsIgnoreCase(postType) ? "Internship.jsp" : "JobPortal.jsp";
 %>
                             <script>
                                 alert('Application sent successfully! The recruiter will review your profile.');
@@ -145,7 +142,7 @@
 %>
                     <script>
                         alert('User profile not found! Please create your profile first.');
-                        location.href = 'createProfile.jsp';
+                        location.href = 'ViewProfile.jsp';
                     </script>
 <%
                 }

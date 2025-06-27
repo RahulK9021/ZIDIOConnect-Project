@@ -230,7 +230,8 @@
   <div class="nav-container">
     <div class="logo">< ZIDIOConnect ></div>
     <ul class="nav-links">
-      
+      <li><a href="JobseekerDashboard.jsp">My Applications</a></li>
+
       <li><a href="Internship.jsp">Internship Portal</a></li>
       <li><a href="ViewProfile.jsp">Update Profile</a></li>
       
