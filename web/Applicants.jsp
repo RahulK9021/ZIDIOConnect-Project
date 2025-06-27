@@ -1,241 +1,177 @@
-<%-- 
-    Document   : Applicants
-    Created on : Jun 23, 2025, 6:41:39 PM
-    Author     : Rahul
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="requirepackage.DBConnect" %>
-<%@ page import="java.sql.*"%>
-<%@ page import="requirepackage.UserController" %>
-<%@ page import="requirepackage.Applicant" %>
+<%@ page import="java.sql.*" %>
+
 <%
-if (session.getAttribute("recruiterEmail") == null) {
-    response.sendRedirect("Login.jsp");
-    return;
-}
+    String recruiterEmail = (String) session.getAttribute("recruiterEmail");
+    if (recruiterEmail == null || recruiterEmail.trim().isEmpty()) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
 %>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Applicant List</title>
-        <style>
-            .applicants-table-container {
-                margin: 20px;
-                padding: 20px;
-                background-color: #f9f9f9;
-                border-radius: 8px;
-            }
-            .table-responsive {
-                overflow-x: auto;
-            }
-            .table-applicants {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-            }
-            .table-applicants th, .table-applicants td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
-            .table-applicants th {
-                background-color: #4CAF50;
-                color: white;
-            }
-            .table-applicants tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-            .table-applicants a {
-                color: #007bff;
-                text-decoration: none;
-            }
-            .table-applicants a:hover {
-                text-decoration: underline;
-            }
-            .no-applicants {
-                text-align: center;
-                color: #666;
-                font-style: italic;
-                padding: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="applicants-table-container">
-            <h3>Applicant List</h3>
-            <div class="table-responsive">
-                <table class="table-applicants">
-                    <thead>
-                        <tr>
-                            <th>Company Name</th>
-                            <th>Applied for</th>
-                            <th>Candidate Email</th>
-                            <th>Post</th>
-                            <th>Full Name</th>
-                            <th>Resume</th>
-                            <th>Education</th>
-                            <th>Phone</th>
-                            <th>Gender</th>
-                            <th>LinkedIn</th>
-                            <th>GitHub</th>
-                            <th>Portfolio</th>
-                            <th>Job Title</th>
-                            <th>Ex -Company</th>
-                            <th>Duration</th>
-                            <th>Skills</th>
-                            <th>Responsibility</th>
-                            <th>Ex Salary</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                        String recruiterEmail = (String) session.getAttribute("recruiterEmail");
-                        PreparedStatement pstmt = null;
-                        ResultSet rs = null;
-                        Connection conn = null;
-                        boolean hasApplicants = false;
-                        
-                        // Check if recruiter is logged in
-                        if (recruiterEmail == null || recruiterEmail.trim().isEmpty()) {
-                        %>
-                            <tr>
-                                <td colspan="15" class="no-applicants" style="color: red;">
-                                    <strong>Error: You are not logged in. Please <a href="login.jsp">login</a> to view applicants.</strong>
-                                </td>
-                            </tr>
-                        <%
-                            return;
-                        }
-                        
-                        try {
-                            DBConnect dbc = new DBConnect();
-                            conn = dbc.getConnection();
-                        String postsSql ="SELECT r.comname, r.jobroll, ri.candidate_email, ri.post_type, ri.fullname, ri.resume, ri.education, ri.phoneno, ri.gender, ri.linkedin, ri.github, ri.pwebsite, ri.jobtitile, ri.excomapny, ri.duration, ri.skills, ri.responsibility, ri.exsalary, ri.application_status FROM recruiter r JOIN recruiter_inbox ri ON r.recruiter_email = ri.recruiter_email WHERE r.recruiter_email = ?";
-                        pstmt = conn.prepareStatement(postsSql);
-                        pstmt.setString(1, recruiterEmail); // ✅ Set the value for the placeholder
-                        rs = pstmt.executeQuery();
+<head>
+    <title>Applicant List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .applicant-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            margin-bottom: 24px;
+        }
+        .applicant-card h5 {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .badge {
+            font-size: 12px;
+            padding: 5px 10px;
+            text-transform: uppercase;
+        }
+        .btn-sm {
+            font-size: 13px;
+        }
+        .info-links a {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary"><i class="fas fa-users me-2"></i>Applicant List</h2>
+            <a href="RecruiterDashboard.jsp" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-1"></i> Back</a>
+        </div>
 
-                        while (rs.next()) {
-                          while (rs.next()) {
-                String comname = rs.getString("comname");
-                String jobroll = rs.getString("jobroll");
-                String candidate_email = rs.getString("candidate_email");
-                String post_type = rs.getString("post_type");
-                String fullname = rs.getString("fullname");
-                String resume = rs.getString("resume");
-                String education = rs.getString("education");
-                String phoneno = rs.getString("phoneno");
-                String gender = rs.getString("gender");
-                String linkedin = rs.getString("linkedin");
-                String github = rs.getString("github");
-                String pwebsite = rs.getString("pwebsite");
-                String jobtitle = rs.getString("jobtitile");
-                String excompany = rs.getString("excomapny");
-                String duration = rs.getString("duration");
-                String skills = rs.getString("skills");
-                String responsibility = rs.getString("responsibility");
-                String exsalary = rs.getString("exsalary");
-                String application_status = rs.getString("application_status");
+        <%
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+            Connection conn = null;
+            boolean hasApplicants = false;
 
-                            if (responsibility.length() > 100) {
-                                responsibility = responsibility.substring(0, 100) + "...";
-                            }
+            try {
+                DBConnect dbc = new DBConnect();
+                conn = dbc.getConnection();
+                String postsSql ="SELECT r.comname, r.jobroll, ri.candidate_email, ri.post_type, ri.fullname, ri.resume, ri.education, ri.phoneno, ri.gender, ri.linkedin, ri.github, ri.pwebsite, ri.jobtitile, ri.excomapny, ri.duration, ri.skills, ri.responsibility, ri.exsalary, ri.application_status FROM recruiter r JOIN recruiter_inbox ri ON r.recruiter_email = ri.recruiter_email WHERE r.recruiter_email = ?";
 
-                        %>
-                        <tr>
-                            <td><%= comname%></td>
-                             <td><%= jobroll %></td>
-                            <td><%= candidate_email %></td>
-                           
-                            <td><%= post_type %></td>
-                             <td><%= fullname %></td>
-                            <td>
-                                <% if (!resume.isEmpty() && !resume.equals("Not specified")) { %>
-                                    <a href="<%= resume %>" target="_blank">View Resume</a>
-                                <% } else { %>
-                                    Not provided
-                                <% } %>
-                            </td>
-                            <td><%= education %></td>
-                            <td><%= phoneno %></td>
-                            <td><%= gender %></td>
-                            <td>
-                                <% if (!linkedin.isEmpty() && !linkedin.equals("Not specified")) { %>
-                                    <a href="<%= linkedin %>" target="_blank">Profile</a>
-                                <% } else { %>
-                                    Not provided
-                                <% } %>
-                            </td>
-                            <td>
-                                <% if (!github.isEmpty() && !github.equals("Not specified")) { %>
-                                    <a href="<%= github %>" target="_blank">Repository</a>
-                                <% } else { %>
-                                    Not provided
-                                <% } %>
-                            </td>
-                            <td>
-                                <% if (!pwebsite.isEmpty() && !pwebsite.equals("Not specified")) { %>
-                                    <a href="<%= pwebsite %>" target="_blank">Website</a>
-                                <% } else { %>
-                                    Not provided
-                                <% } %>
-                            </td>
-                            <td><%= jobtitle %></td>
-                            <td><%= excompany %></td>
-                            <td><%= duration %></td>
-                            <td><%= skills %></td>
-                            <td><%= responsibility %></td>
-                            <td><%= exsalary %></td>
-                            <td>
-    <% if (!"accepted".equalsIgnoreCase(rs.getString("application_status"))) { %>
-        <form action="UpdateApplicationStatus.jsp" method="post" style="display:inline;">
-            <input type="hidden" name="email" value="<%= candidate_email %>">
-            <input type="hidden" name="status" value="accepted">
-            <button type="submit" class="btn btn-success btn-sm">Accept</button>
-        </form>
+                pstmt = conn.prepareStatement(postsSql);
+                pstmt.setString(1, recruiterEmail);
+                rs = pstmt.executeQuery();
 
-        <form action="UpdateApplicationStatus.jsp" method="post" style="display:inline;">
-            <input type="hidden" name="email" value="<%= candidate_email %>">
-            <input type="hidden" name="status" value="rejected">
-            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-        </form>
-    <% } else { %>
-        <span class="badge bg-success">Accepted</span>
-    <% } %>
-</td>
+                while (rs.next()) {
+                    hasApplicants = true;
 
-                        </tr>
-                        <% 
-                            }
-                        }
-}                       catch (SQLException e) {
-                            out.println("SQL Error: " + e.getMessage());
-                            e.printStackTrace();
-                        } finally {
-                            // Properly close resources
-                            try {
-                                if (rs != null) rs.close();
-                                if (pstmt != null) pstmt.close();
-                                if (conn != null) conn.close();
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        
-                        // Show message if no applicants found
-                        if (!hasApplicants) {
-                        %>
-                        <tr>
-                            <td colspan="15" class="no-applicants">No applicants found for this recruiter.</td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                    String comname = rs.getString("comname");
+                    String jobroll = rs.getString("jobroll");
+                    String candidate_email = rs.getString("candidate_email");
+                    String post_type = rs.getString("post_type");
+                    String fullname = rs.getString("fullname");
+                    String resume = rs.getString("resume");
+                    String education = rs.getString("education");
+                    String phoneno = rs.getString("phoneno");
+                    String gender = rs.getString("gender");
+                    String linkedin = rs.getString("linkedin");
+                    String github = rs.getString("github");
+                    String pwebsite = rs.getString("pwebsite");
+                    String jobtitle = rs.getString("jobtitile");
+                    String excompany = rs.getString("excomapny");
+                    String duration = rs.getString("duration");
+                    String skills = rs.getString("skills");
+                    String responsibility = rs.getString("responsibility");
+                    String exsalary = rs.getString("exsalary");
+                    String application_status = rs.getString("application_status");
+
+                    if (responsibility.length() > 100) {
+                        responsibility = responsibility.substring(0, 100) + "...";
+                    }
+        %>
+
+        <div class="applicant-card">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <h5 class="mb-1"><%= fullname %></h5>
+                    <p class="mb-0 text-muted"><i class="fas fa-building me-1"></i> <%= comname %></p>
+                    <small class="text-muted"><i class="fas fa-briefcase me-1"></i> <%= jobroll %></small>
+                </div>
+                <span class="badge bg-<%= post_type.equals("internship") ? "info" : "success" %>">
+                    <%= post_type.toUpperCase() %>
+                </span>
+            </div>
+
+            <p class="mb-1"><strong>Education:</strong> <%= education %></p> 
+            <p class="mb-1"><strong>Phone No:</strong> <%= phoneno %></p>
+            <p class="mb-1"><strong>Gender:</strong> <%= gender %></p>
+           <% if (jobtitle != null && !jobtitle.trim().isEmpty()) { %>
+            <p class="mb-1"><strong>Experience:</strong> <%= jobtitle %> at <%= excompany %> — <%= duration %></p>
+            <p class="mb-1"><strong>Skills:</strong> <%= skills %></p>
+            <p class="mb-1"><strong>Responsibilities:</strong> <%= responsibility %></p>
+            <p class="mb-1"><strong>Previous Salary:</strong> ₹<%= exsalary %></p>
+          <% } %>
+
+            <div class="info-links mb-3">
+                <% if (!linkedin.isEmpty()) { %>
+                    <a href="<%= linkedin %>" class="btn btn-outline-primary btn-sm" target="_blank"><i class="fab fa-linkedin me-1"></i>LinkedIn</a>
+                <% } %>
+                <% if (!github.isEmpty()) { %>
+                    <a href="<%= github %>" class="btn btn-outline-dark btn-sm" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
+                <% } %>
+                <% if (!pwebsite.isEmpty()) { %>
+                    <a href="<%= pwebsite %>" class="btn btn-outline-info btn-sm" target="_blank"><i class="fas fa-globe me-1"></i>Website</a>
+                <% } %>
+                <% if (!resume.isEmpty()) { %>
+                    <a href="<%= resume %>" class="btn btn-outline-success btn-sm" target="_blank"><i class="fas fa-file-alt me-1"></i>Resume</a>
+                <% } %>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="text-muted small"><i class="fas fa-envelope me-1"></i><%= candidate_email %> | <i class="fas fa-phone me-1"></i><%= phoneno %></div>
+
+                <% if (!"accepted".equalsIgnoreCase(application_status)) { %>
+                    <form action="UpdateApplicationStatus.jsp" method="post" class="d-inline">
+                        <input type="hidden" name="email" value="<%= candidate_email %>">
+                        <input type="hidden" name="status" value="accepted">
+                        <button class="btn btn-success btn-sm me-2">Accept</button>
+                    </form>
+                    <form action="DeleteApplication.jsp" method="post" class="d-inline">
+                        <input type="hidden" name="email" value="<%= candidate_email %>">
+                        <button class="btn btn-danger btn-sm">Reject</button>
+                    </form>
+
+                <% } else { %>
+                    <span class="badge bg-success px-3 py-2">Accepted</span>
+                <% } %>
             </div>
         </div>
-    </body>
+
+        <% 
+                } // end while
+            } catch (SQLException e) {
+                out.println("SQL Error: " + e.getMessage());
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (pstmt != null) pstmt.close();
+                    if (conn != null) conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (!hasApplicants) {
+        %>
+        <div class="alert alert-warning text-center mt-4">
+            No applicants found for this recruiter.
+        </div>
+        <% } %>
+    </div>
+</body>
 </html>

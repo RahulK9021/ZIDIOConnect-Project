@@ -225,7 +225,7 @@ a{
                         <p class="text-muted">Welcome, <%= recruiterEmail %></p>
                     </div>
                     <div class="col-md-4 text-end">
-                        <a href="Registration.jsp" class="btn btn-success btn-custom me-2">
+                        <a href="NewPost.jsp" class="btn btn-success btn-custom me-2">
                             <i class="fas fa-plus me-1"></i>Add New Post
                         </a>
                         <a href="Login.jsp" class="btn btn-outline-danger btn-custom">
