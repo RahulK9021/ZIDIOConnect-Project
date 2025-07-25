@@ -3,24 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/src/java/requirepackage/DBConnect.java</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/css/viewProfile.css</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/Apply.jsp</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/JobPortal.jsp</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/ScheduleInterview.jsp</file>
+            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/css/Register.css</file>
+            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/src/java/requirepackage/Internship.java</file>
+            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/NewPost.jsp</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/JobseekerDashboard.jsp</file>
+            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/ScheduleInterview.jsp</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/Applicants.jsp</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/src/java/requirepackage/Applicant.java</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/UpdateApplicationStatus.jsp</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/Login.jsp</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/Register.jsp</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/src/java/requirepackage/Recruiter.java</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/Internship.jsp</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/ViewProfile.jsp</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/src/java/requirepackage/UserController.java</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/SaveInterview.jsp</file>
-            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/RecruiterDashboard.jsp</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/Home.jsp</file>
+            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/RecruiterDashboard.jsp</file>
+            <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/web/ApplicationManagement.jsp</file>
             <file>file:/C:/java/Netsoft_Java/ZidioConnect/LinkingJobs/src/java/requirepackage/ViewProfile.java</file>
         </group>
     </open-files>

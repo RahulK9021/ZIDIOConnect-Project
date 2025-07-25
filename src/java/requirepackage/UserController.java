@@ -15,6 +15,7 @@ public class UserController {
      private ArrayList <ViewProfile> proflist =new ArrayList<>();
      private ArrayList <Recruiter> reclist=new ArrayList<>();
      private ArrayList<Applicant>applist=new ArrayList<>();
+     private ArrayList<Internship>postlist=new ArrayList<>();
     DBConnect dbc;
     ResultSet rs;
     String sql;
@@ -131,46 +132,110 @@ public class UserController {
          }
          return reclist;
      }
-//     public ArrayList<Applicant> getApplicants(int id){
-//         String sql="select candidate_email,post_type,fullname,resume,education,phoneno,gender,linkedin,github,pwebsite,jobtitile,excompany,duration,skills,responsibility,exsalary from recruiter_inbox where recruiter_email=?";
-//         String recruiterEmail = (String) session.getAttribute("recruiterEmail"); 
-//         stmt.setString(1, recruiterEmail);
-//         applist =new ArrayList<>();
-//         try{
-//             rs=dbc.getApplicants(sql);
-//             if(rs != null){
-//                 while(rs.next()){
-//                     Applicant app=new Applicant();
-//                     app.setCandidate_email(rs.getString(1));
-//                     app.setJob_id(rs.getString(2));
-//                     app.setPost_type(rs.getString(3));
-//                     app.setFullname(rs.getString(4));
-//                     app.setResume(rs.getString(5));
-//                     app.setEducation(rs.getString(6));
-//                     app.setPhoneno(rs.getString(7));
-//                     app.setDate(rs.getDate(8));
-//                     app.setAddress(rs.getString(9));
-//                     app.setGender(rs.getString(10));
-//                     app.setLinkedin(rs.getString(11));
-//                     app.setGithub(rs.getString(12));
-//                     app.setJobtitile(rs.getString(13));
-//                     app.setExcompany(rs.getString(14));
-//                     app.setDuration(rs.getString(15));
-//                     app.setSkills(rs.getString(16));
-//                     app.setResponsibility(rs.getString(17));
-//                     app.setExsalary(rs.getString(18));
-//                     applist.add(app);
-//                 }
-//             }
-//         }catch(Exception ex){
-//             System.out.println(ex);
-//         }
-//         return applist;
-//     }
+    
+public boolean addPost(Internship post) {
+    boolean flag = false;
+    try {
+        Connection con = dbc.getConnection();
+        String query = "INSERT INTO newpost (recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des, post_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement pst = con.prepareStatement(query);
+        pst.setString(1, post.getRecemail());
+        pst.setString(2, post.getComnm());
+        pst.setString(3, post.getJr());
+        pst.setString(4, post.getSkill());
+        pst.setString(5, post.getLoc());
+        pst.setDate(6, post.getDeadline());
+        pst.setString(7, post.getSalary());
+        pst.setString(8, post.getExp());
+        pst.setString(9, post.getDec());
+        pst.setString(10, post.getPostType());
+
+        int rows = pst.executeUpdate();
+        if (rows > 0) flag = true;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return flag;
+}
+     public ArrayList <Internship> getNewinternships(Internship obj){
+         String sql = "SELECT comname, jobroll, skill, loc, deadline, salary, exp, des FROM newpost WHERE post_type = 'internship'";
+
+         postlist=new ArrayList <>();
+         try{
+         rs=dbc.getNewinternships(sql);
+        while(rs.next()){
+             Internship rec=new Internship();
+             rec.setComnm(rs.getString(1));
+             rec.setJr(rs.getString(2));
+             rec.setSkill(rs.getString(3));
+             rec.setLoc(rs.getString(4));
+             rec.setDeadline(rs.getDate(5));
+             rec.setSalary(rs.getString(6));
+             rec.setExp(rs.getString(7));
+             rec.setDec(rs.getString(8));
+             postlist.add(rec);            
+         }
+         }catch(Exception ex){
+             System.out.println(ex );
+         }
+         return postlist;
+     }
      
-//     public boolean addRecruiter(Recruiter obj){
-//         sql="insert into recruiter values('"+obj.getRecemail()+"','"+obj.getRecpwd()+"','"+obj.getRecfnm()+"','"+obj.getComweb()+"','"+obj.getComnm()+"','"+obj.getJr()+"','"+obj.getSkill()+"','"+obj.getLoc()+"',"+obj.getDeadline()+",'"+obj.getSalary()+"','"+obj.getExp()+"','"+obj.getDec()+"')";
-//         dbc.addRecruiter(sql);
-//         return true;
-//     }
+     public ArrayList<Internship> getNewjobs(){
+         String sql="select comname,jobroll,skill,loc,deadline,salary,exp,des from newpost where post_type ='job'";
+         postlist=new ArrayList<>();
+         try{
+         rs=dbc.getNewjobs(sql);
+         while(rs.next()){
+             Internship rec=new Internship();
+             rec.setComnm(rs.getString(1));
+             rec.setJr(rs.getString(2));
+             rec.setSkill(rs.getString(3));
+             rec.setLoc(rs.getString(4));
+             rec.setDeadline(rs.getDate(5));
+             rec.setSalary(rs.getString(6));
+             rec.setExp(rs.getString(7));
+             rec.setDec(rs.getString(8));
+             postlist.add(rec);
+         }
+         }catch(Exception ex){
+             System.out.println(ex);
+         }
+         return postlist;
+     }
+     
+   public boolean updateProfile(ViewProfile vp) {
+    try {
+        Connection conn = dbc.getConnection();
+        String query = "UPDATE viewprofile SET fnm=?, file=?, education=?, phone=?, dob=?, address=?, type=?, status=?, linkedin=?, github=?, personalwebsite=?, jobtitle=?, excompany=?, duration=?, skills=?, responsibility=?, exsalary=? WHERE email=?";
+        PreparedStatement pst = conn.prepareStatement(query);
+        // Set parameters...
+        pst.setString(1, vp.getFnm());
+        pst.setString(2, vp.getFile());
+        pst.setString(3, vp.getEducation());
+        pst.setString(4, vp.getPhone());
+        pst.setDate(5, vp.getDob());
+        pst.setString(6, vp.getAddress());
+        pst.setString(7, vp.getType());
+        pst.setString(8, vp.getStatus());
+        pst.setString(9, vp.getLinkedin());
+        pst.setString(10, vp.getGithub());
+        pst.setString(11, vp.getPersonalwebsite());
+        pst.setString(12, vp.getJobtitle());
+        pst.setString(13, vp.getExcompany());
+        pst.setString(14, vp.getDuration());
+        pst.setString(15, vp.getSkills());
+        pst.setString(16, vp.getResponsibility());
+        pst.setString(17, vp.getExsalary());
+        pst.setString(18, vp.getEmail());
+        
+        int result = pst.executeUpdate();
+        conn.close();
+        return result > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
 }

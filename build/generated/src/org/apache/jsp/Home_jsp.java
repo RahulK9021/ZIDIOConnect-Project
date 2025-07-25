@@ -194,7 +194,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("  <section class=\"testimonials\">\n");
       out.write("    <h2>What Our Users Say</h2>\n");
       out.write("    <div class=\"testimonial\">\n");
-      out.write("      \"Thanks to DreamJob, I found a job I love in just two weeks!\" – <strong>Gourav Gaikwad</strong>\n");
+      out.write("      \"Thanks to ZIDIOConnect, I found a job I love in just two weeks!\" – <strong>Gourav Gaikwad</strong>\n");
       out.write("    </div>\n");
       out.write("    <div class=\"testimonial\">\n");
       out.write("      \"The platform is super easy to use and has tons of real opportunities.\" – <strong>Ashish P</strong>\n");

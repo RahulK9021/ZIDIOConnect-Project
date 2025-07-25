@@ -57,7 +57,8 @@ public final class Internship_jsp extends org.apache.jasper.runtime.HttpJspBase
 
     DBConnect dbc=new DBConnect();
     UserController utc = new UserController();
-    ResultSet rs=dbc.getInternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");  
+    ResultSet rs=dbc.getInternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");
+    ResultSet rs2=dbc.getNewinternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM newpost WHERE post_type = 'internship'");
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -277,14 +278,15 @@ public final class Internship_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<nav class=\"navbar\">\n");
       out.write("  <div class=\"nav-container\">\n");
       out.write("    <div class=\"logo\">< ZIDIOConnect ></div>\n");
-      out.write("    <ul class=\"nav-links\">\n");
-      out.write("      \n");
-      out.write("      <li><a href=\"");
+      out.write("   <ul class=\"nav-links\">\n");
+      out.write("  <li><a href=\"");
       out.print( request.getContextPath() );
       out.write("/JobPortal.jsp\">Job Portal</a></li>\n");
-      out.write("      <li><a href=\"ViewProfile.jsp\">Update Profile</a></li>\n");
-      out.write("      \n");
-      out.write("    </ul>\n");
+      out.write("  <li><a href=\"Internship.jsp\">Internships</a></li>\n");
+      out.write("  <li><a href=\"ViewProfile.jsp\">Update Profile</a></li>\n");
+      out.write("  <li><a href=\"JobseekerDashboard.jsp\">My Applications</a></li> <!-- ✅ Added this -->\n");
+      out.write("</ul>\n");
+      out.write("\n");
       out.write("  </div>\n");
       out.write("</nav>\n");
       out.write("\n");
@@ -325,6 +327,55 @@ public final class Internship_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</p>\n");
       out.write("        <p><b>💼 what Will You Learn :</b> ");
       out.print( rs.getString(10) );
+      out.write("</p>\n");
+      out.write("       <a href=\"Apply.jsp?job_id=");
+      out.print( rs.getString("id") );
+      out.write("&recruiter_email=");
+      out.print( rs.getString("recruiter_email") );
+      out.write("&post_type=internship\" class=\"apply-btn\">Apply Now</a>\n");
+      out.write("             </div>\n");
+      out.write("          ");
+
+             }
+            }
+         
+      out.write("\n");
+      out.write("      </div>\n");
+      out.write("      <div class=\"internships\">\n");
+      out.write("               ");
+
+                  if(rs2 != null){
+                  while(rs2.next())
+                 {
+                
+      out.write("\n");
+      out.write("             <div class=\"card\">\n");
+      out.write("                <h3> ");
+      out.print( rs2.getString(4) );
+      out.write("</h3>\n");
+      out.write("        <p><b>🚀 Company :</b> ");
+      out.print( rs2.getString(3) );
+      out.write("</p>\n");
+      out.write("        <p><b>🎯 Job Role :</b> ");
+      out.print( rs2.getString(4) );
+      out.write("</p>\n");
+      out.write("        <p><b>🛠 Skills :</b> ");
+      out.print( rs2.getString(5) );
+      out.write("</p>\n");
+      out.write("        <p><b>📍 Location :</b> ");
+      out.print( rs2.getString(6) );
+      out.write("</p>\n");
+      out.write("        <p><b>⏳ Deadline:</b> ");
+      out.print( rs2.getString(7) );
+      out.write("</p>\n");
+      out.write("        <p><b>💰 Stipend :</b> ₹");
+      out.print( rs2.getString(8) );
+      out.write("</p>\n");
+      out.write("        <p><b>🕒 Duration :</b> ");
+      out.print( rs2.getString(9) );
+      out.write("</p>\n");
+      out.write("        <p><b>💼 what Will You Learn :</b> ");
+      out.print( rs2.getString(10) );
       out.write("</p>\n");
       out.write("       <a href=\"Apply.jsp?job_id=");
       out.print( rs.getString("id") );

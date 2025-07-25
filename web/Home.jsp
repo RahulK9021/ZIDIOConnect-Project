@@ -155,7 +155,7 @@ a{
   <section class="testimonials">
     <h2>What Our Users Say</h2>
     <div class="testimonial">
-      "Thanks to DreamJob, I found a job I love in just two weeks!" – <strong>Gourav Gaikwad</strong>
+      "Thanks to ZIDIOConnect, I found a job I love in just two weeks!" – <strong>Gourav Gaikwad</strong>
     </div>
     <div class="testimonial">
       "The platform is super easy to use and has tons of real opportunities." – <strong>Ashish P</strong>

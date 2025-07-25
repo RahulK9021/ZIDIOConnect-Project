@@ -13,7 +13,8 @@
 <%
     DBConnect dbc=new DBConnect();
     UserController utc = new UserController();
-    ResultSet rs=dbc.getInternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");  
+    ResultSet rs=dbc.getInternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM recruiter WHERE post_type = 'internship'");
+    ResultSet rs2=dbc.getNewinternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des FROM newpost WHERE post_type = 'internship'");
 %>
 <!DOCTYPE html>
 <html>
@@ -226,22 +227,21 @@
    <header>
     <h1>"Your career, our commitment." </h1>
     <p>ZIDIOConnect Helps You To Unlock Your Career Potential !! <br> Because we believe in<i> <b> Talent Deserves Recognition</b> </i></p>
-    <a href="#services" class="btn">Our Services</a>
     <svg class="wave" viewBox="0 0 1440 320"><path fill="#f4f4f9" fill-opacity="1" d="M0,160L80,154.7C160,149,320,139,480,138.7C640,139,800,149,960,165.3C1120,181,1280,203,1360,213.3L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
+    
   </header>
 <nav class="navbar">
   <div class="nav-container">
     <div class="logo">< ZIDIOConnect ></div>
    <ul class="nav-links">
   <li><a href="<%= request.getContextPath() %>/JobPortal.jsp">Job Portal</a></li>
-  <li><a href="Internship.jsp">Internships</a></li>
-  <li><a href="ViewProfile.jsp">Update Profile</a></li>
-  <li><a href="JobseekerDashboard.jsp">My Applications</a></li> <!-- ✅ Added this -->
+  <li><a href="JobseekerDashboard.jsp">My Applications</a></li> 
+     <li><a href="ViewProfile.jsp">Update Profile</a></li>
 </ul>
 
   </div>
 </nav>
-
+        
          <section id="internships" class="section">
            <h2>Latest Internships</h2>
            <div class="internships">
@@ -261,6 +261,29 @@
         <p><b>🕒 Duration :</b> <%= rs.getString(9) %></p>
         <p><b>💼 what Will You Learn :</b> <%= rs.getString(10) %></p>
        <a href="Apply.jsp?job_id=<%= rs.getString("id") %>&recruiter_email=<%= rs.getString("recruiter_email") %>&post_type=internship" class="apply-btn">Apply Now</a>
+             </div>
+          <%
+             }
+            }
+         %>
+      </div>
+      <div class="internships">
+               <%
+                  if(rs2 != null){
+                  while(rs2.next())
+                 {
+                %>
+             <div class="card">
+                <h3> <%= rs2.getString(4) %></h3>
+        <p><b>🚀 Company :</b> <%= rs2.getString(3) %></p>
+        <p><b>🎯 Job Role :</b> <%= rs2.getString(4) %></p>
+        <p><b>🛠 Skills :</b> <%= rs2.getString(5) %></p>
+        <p><b>📍 Location :</b> <%= rs2.getString(6) %></p>
+        <p><b>⏳ Deadline:</b> <%= rs2.getString(7) %></p>
+        <p><b>💰 Stipend :</b> ₹<%= rs2.getString(8) %></p>
+        <p><b>🕒 Duration :</b> <%= rs2.getString(9) %></p>
+        <p><b>💼 what Will You Learn :</b> <%= rs2.getString(10) %></p>
+       <a href="Apply.jsp?job_id=<%= rs2.getString("id") %>&recruiter_email=<%= rs2.getString("recruiter_email") %>&post_type=internship" class="apply-btn">Apply Now</a>
              </div>
           <%
              }

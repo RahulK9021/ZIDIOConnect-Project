@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*, java.util.*" %>
@@ -70,13 +69,19 @@
                 </script>
 <%
             } else {
-                // Continue with profile retrieval and application submission
+                // Get profile data along with job details
                 profileStmt = conn.prepareStatement(
-                    "SELECT fullname, resume, education, phoneno, address, gender, " +
-                    "linkedin, github, pwebsite, jobtitile, excomapny, duration, " +
-                    "skills, responsibility, exsalary FROM viewprofile WHERE email = ?"
+                    "SELECT vp.fullname, vp.resume, vp.education, vp.phoneno, vp.address, vp.gender, " +
+                    "vp.linkedin, vp.github, vp.pwebsite, vp.jobtitile, vp.excomapny, vp.duration, " +
+                    "vp.skills, vp.responsibility, vp.exsalary, np.jobroll, r.comname " +
+                    "FROM viewprofile vp " +
+                    "CROSS JOIN newpost np " +
+                    "CROSS JOIN recruiter r " +
+                    "WHERE vp.email = ? AND np.id = ? AND r.recruiter_email = ?"
                 );
                 profileStmt.setString(1, userEmail);
+                profileStmt.setString(2, jobId);
+                profileStmt.setString(3, recruiterEmail);
                 rs = profileStmt.executeQuery();
                 
                 if (rs.next()) {
@@ -91,12 +96,12 @@
                         </script>
 <%
                     } else {
-                        // Insert application
+                        // Insert application with job role and company name
                         insertStmt = conn.prepareStatement(
                             "INSERT INTO recruiter_inbox (recruiter_email, candidate_email, job_id, post_type, " +
                             "fullname, resume, education, phoneno, address, gender, linkedin, github, " +
                             "pwebsite, jobtitile, excomapny, duration, skills, responsibility, exsalary, " +
-                            "application_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())"
+                            "jobroll, companyname, application_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())"
                         );
                         
                         insertStmt.setString(1, recruiterEmail);
@@ -118,6 +123,8 @@
                         insertStmt.setString(17, rs.getString("skills"));
                         insertStmt.setString(18, rs.getString("responsibility"));
                         insertStmt.setString(19, rs.getString("exsalary"));
+                        insertStmt.setString(20, rs.getString("jobroll"));
+                        insertStmt.setString(21, rs.getString("comname"));
                         
                         int rows = insertStmt.executeUpdate();
                         
@@ -141,7 +148,7 @@
                 } else {
 %>
                     <script>
-                        alert('User profile not found! Please create your profile first.');
+                        alert('User profile not found or invalid job/recruiter information! Please check and try again.');
                         location.href = 'ViewProfile.jsp';
                     </script>
 <%
@@ -149,6 +156,7 @@
             }
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
+            e.printStackTrace();
 %>
             <script>
                 alert('System error occurred! Please try again later.');

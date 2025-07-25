@@ -90,5 +90,33 @@ public class DBConnect {
         }
         return rs;
     }
-   
+    public boolean addPost(String sql){
+        try{
+            stmt=cn.createStatement();
+            stmt.executeUpdate(sql);
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+         return true;
+    }
+     public ResultSet getNewinternships(String sql){
+        try{
+        stmt=cn.createStatement();
+        rs=stmt.executeQuery(sql);
+    }catch(Exception ex){
+            System.out.println(ex);
+            }
+        return rs;
+    }
+    
+    public ResultSet getNewjobs(String sql){
+        try{
+            stmt=cn.createStatement();
+            rs=stmt.executeQuery(sql);
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return rs;
+    }
+    
 }

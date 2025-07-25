@@ -14,6 +14,7 @@
   DBConnect dbc=new DBConnect();
   UserController utc=new UserController();
   ResultSet rs=dbc.getJobs("select id, recruiter_email, comname,jobroll,skill,loc,deadline,salary,exp,des from recruiter where post_type ='job'");
+  ResultSet rs2=dbc.getNewjobs("select id, recruiter_email, comname,jobroll,skill,loc,deadline,salary,exp,des from newpost where post_type ='job'");
     
 %>
 <!DOCTYPE html>
@@ -258,6 +259,25 @@
         <p><b>🕒 Experience:</b> <%= rs.getString(9) %></p>
         <p><b>💼 Description:</b> <%= rs.getString(10) %></p>
         <a href="Apply.jsp?job_id=<%= rs.getString("id") %>&recruiter_email=<%= rs.getString("recruiter_email") %>&post_type=job" class="apply-btn">Apply Now</a>
+  </div>
+    <% } %>
+ 
+       
+    <%
+     while (rs2.next())
+    {
+    %>
+    <div class="card">
+        <h3> <%= rs2.getString(4) %></h3>
+        <p><b>🚀 Company:</b> <%= rs2.getString(3) %></p>
+        <p><b>🎯 Job Role:</b> <%= rs2.getString(4) %></p>
+        <p><b>🛠 Skills:</b> <%= rs2.getString(5) %></p>
+        <p><b>📍 Location:</b> <%= rs2.getString(6) %></p>
+        <p><b>⏳ Deadline:</b> <%= rs2.getString(7) %></p>
+        <p><b>💰 Salary:</b> ₹<%= rs2.getString(8) %></p>
+        <p><b>🕒 Experience:</b> <%= rs2.getString(9) %></p>
+        <p><b>💼 Description:</b> <%= rs2.getString(10) %></p>
+        <a href="Apply.jsp?job_id=<%= rs2.getString("id") %>&recruiter_email=<%= rs2.getString("recruiter_email") %>&post_type=job" class="apply-btn">Apply Now</a>
   </div>
     <% } %>
   </div>

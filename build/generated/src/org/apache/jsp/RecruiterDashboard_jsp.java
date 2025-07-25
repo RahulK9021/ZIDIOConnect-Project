@@ -275,7 +275,7 @@ public final class RecruiterDashboard_jsp extends org.apache.jasper.runtime.Http
       out.write("</p>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"col-md-4 text-end\">\n");
-      out.write("                        <a href=\"Registration.jsp\" class=\"btn btn-success btn-custom me-2\">\n");
+      out.write("                        <a href=\"NewPost.jsp\" class=\"btn btn-success btn-custom me-2\">\n");
       out.write("                            <i class=\"fas fa-plus me-1\"></i>Add New Post\n");
       out.write("                        </a>\n");
       out.write("                        <a href=\"Login.jsp\" class=\"btn btn-outline-danger btn-custom\">\n");

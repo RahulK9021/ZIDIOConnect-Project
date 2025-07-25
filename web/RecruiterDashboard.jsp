@@ -302,131 +302,138 @@ a{
         </div>
 
         <!-- Posts List -->
-        <div class="dashboard-card">
-            <div class="card-body">
-                <h4 class="mb-4">Your Posts</h4>
-                
-                <%
-                try {
-                   
-                    
-                    String postsSql = "SELECT * FROM recruiter WHERE recruiter_email = ? ORDER BY id DESC";
-                    pstmt = conn.prepareStatement(postsSql);
-                    pstmt.setString(1, recruiterEmail);
-                    rs = pstmt.executeQuery();
-                    
-                    boolean hasPosts = false;
-                    while (rs.next()) {
-                        hasPosts = true;
-                        int id = rs.getInt("id");
-                         String company = rs.getString("comname") != null ? rs.getString("comname") : "Company";
-                        String jobRole = rs.getString("jobroll") != null ? rs.getString("jobroll") : "Not specified";
-                        String skills = rs.getString("skill") != null ? rs.getString("skill") : "Not specified";
-                        String location = rs.getString("loc") != null ? rs.getString("loc") : "Not specified";
-                        Date deadline = rs.getDate("deadline");
-                        String salary = rs.getString("salary") != null ? rs.getString("salary") : "Not specified";
-                         String experience = rs.getString("exp") != null ? rs.getString("exp") : "No description";
-                        String description = rs.getString("des") != null ? rs.getString("des") : "No description";
-                        String postType = rs.getString("post_type") != null ? rs.getString("post_type") : "No description";
-                       
-                       
-                        
-                        // Truncate description if too long
-                        if (description.length() > 100) {
-                            description = description.substring(0, 100) + "...";
-                        }
-                %>
-                
-             <div class="modern-job-card">
-  <div class="modern-card-content">
- 
+        <!-- Recruiter Posts Section -->
+<div class="dashboard-card">
+  <div class="card-body">
+    <h4 class="mb-4">Your Posts</h4>
 
-    <!-- Existing HTML omitted for brevity -->
-<% 
-    // inside the loop:
-    if ("internship".equalsIgnoreCase(postType)) {
-%>
+    <%
+    try {
+        String postsSql = "SELECT * FROM recruiter WHERE recruiter_email = ? ORDER BY id DESC";
+        pstmt = conn.prepareStatement(postsSql);
+        pstmt.setString(1, recruiterEmail);
+        rs = pstmt.executeQuery();
 
-<div class="modern-job-card">
-  <div class="modern-card-content">
-    <div class="card-header-row">
-      <h4><%= jobRole %></h4>
-      <span class="badge badge-internship"><%= postType.toUpperCase() %></span>
-    </div>
-    <ul class="job-details">
-      <li><i class="fas fa-building"></i><strong> Company:</strong> <%= company %></li>
-      <li><i class="fas fa-briefcase"></i><strong> Job Role:</strong> <%= jobRole %></li>
-      <li><i class="fas fa-tools"></i><strong> Skills:</strong> <%= skills %></li>
-      <li><i class="fas fa-map-marker-alt"></i><strong> Location:</strong> <%= location %></li>
-      <li><i class="fas fa-hourglass-half"></i><strong> Deadline:</strong> <%= deadline != null ? new java.text.SimpleDateFormat("dd-MM-yyyy").format(deadline) : "No deadline" %></li>
-      <li><i class="fas fa-money-bill-wave"></i><strong> Stipend:</strong> ₹<%= salary %></li>
-      <li><i class="fas fa-clock"></i><strong> Duration:</strong> <%= experience %></li>
-      <li><i class="fas fa-book-reader"></i><strong> What Will You Learn:</strong> <%= description %></li>
-    </ul>
-  </div>
-  <div class="card-actions">
-    <button class="btn edit" onclick="editPost(<%= id %>)"><i class="fas fa-edit"></i> Edit</button>
-    <button class="btn delete" onclick="deletePost(<%= id %>, '<%= jobRole %>')"><i class="fas fa-trash"></i> Delete</button>
-  </div>
-</div>
+        boolean hasPosts = false;
+        while (rs.next()) {
+            hasPosts = true;
+            int id = rs.getInt("id");
+            String company = rs.getString("comname");
+            String jobRole = rs.getString("jobroll");
+            String skills = rs.getString("skill");
+            String location = rs.getString("loc");
+            Date deadline = rs.getDate("deadline");
+            String salary = rs.getString("salary");
+            String experience = rs.getString("exp");
+            String description = rs.getString("des");
+            String postType = rs.getString("post_type");
 
-<% 
-    } else { 
-%>
-
-<div class="modern-job-card">
-  <div class="modern-card-content">
-    <div class="card-header-row">
-      <h4><%= jobRole %></h4>
-      <span class="badge badge-job"><%= postType.toUpperCase() %></span>
-    </div>
-    <ul class="job-details">
-      <li><i class="fas fa-building"></i><strong> Company:</strong> <%= company %></li>
-      <li><i class="fas fa-briefcase"></i><strong> Job Role:</strong> <%= jobRole %></li>
-      <li><i class="fas fa-tools"></i><strong> Skills:</strong> <%= skills %></li>
-      <li><i class="fas fa-map-marker-alt"></i><strong> Location:</strong> <%= location %></li>
-      <li><i class="fas fa-hourglass-half"></i><strong> Deadline:</strong> <%= deadline != null ? new java.text.SimpleDateFormat("dd-MM-yyyy").format(deadline) : "No deadline" %></li>
-      <li><i class="fas fa-money-bill-wave"></i><strong> Salary:</strong> ₹<%= salary %></li>
-      <li><i class="fas fa-briefcase"></i><strong> Experience:</strong> <%= experience %></li>
-      <li><i class="fas fa-info-circle"></i><strong> Description:</strong> <%= description %></li>
-    </ul>
-  </div>
-  <div class="card-actions">
-    <button class="btn edit" onclick="editPost(<%= id %>)"><i class="fas fa-edit"></i> Edit</button>
-    <button class="btn delete" onclick="deletePost(<%= id %>, '<%= jobRole %>')"><i class="fas fa-trash"></i> Delete</button>
-  </div>
-</div>
-
-<%
-    }
-%>
-<%
-                    }
-                    
-                    if (!hasPosts) {
-                %>
-                <div class="text-center py-5">
-                    <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
-                    <h4 class="text-muted">No Posts Yet</h4>
-                    <p class="text-muted">Start by creating your first job or internship post!</p>
-                    <a href="Registration.jsp" class="btn btn-success btn-custom">
-                        <i class="fas fa-plus me-1"></i>Create Your First Post
-                    </a>
-                </div>
-                <%
-                    }
-                    
-                } catch (Exception e) {
-                    out.println("<div class='alert alert-danger'>Error loading posts: " + e.getMessage() + "</div>");
-                } finally {
-                    try { if (rs != null) rs.close(); } catch (Exception e) {}
-                    try { if (pstmt != null) pstmt.close(); } catch (Exception e) {}
-                    try { if (conn != null) conn.close(); } catch (Exception e) {}
-                }
-                %>
-            </div>
+            if (description != null && description.length() > 100) {
+                description = description.substring(0, 100) + "...";
+            }
+    %>
+    <div class="modern-job-card">
+      <div class="modern-card-content">
+        <div class="card-header-row">
+          <h4><%= jobRole %></h4>
+          <span class="badge badge-<%= postType.equals("job") ? "job" : "internship" %>"><%= postType.toUpperCase() %></span>
         </div>
+        <ul class="job-details">
+          <li><i class="fas fa-building"></i><strong> Company:</strong> <%= company %></li>
+          <li><i class="fas fa-tools"></i><strong> Skills:</strong> <%= skills %></li>
+          <li><i class="fas fa-map-marker-alt"></i><strong> Location:</strong> <%= location %></li>
+          <li><i class="fas fa-hourglass-half"></i><strong> Deadline:</strong> <%= deadline != null ? new java.text.SimpleDateFormat("dd-MM-yyyy").format(deadline) : "No deadline" %></li>
+          <li><i class="fas fa-money-bill-wave"></i><strong> Stipend:</strong> ₹<%= salary %></li>
+          <li><i class="fas fa-clock"></i><strong> Duration:</strong> <%= experience %></li>
+          <li><i class="fas fa-book-reader"></i><strong> What Will You Learn:</strong> <%= description %></li>
+        </ul>
+      </div>
+      <div class="card-actions">
+        <button class="btn edit" onclick="editPost(<%= id %>)"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn delete" onclick="deletePost(<%= id %>, '<%= jobRole %>')"><i class="fas fa-trash"></i> Delete</button>
+      </div>
     </div>
+    <%
+        }
+        if (!hasPosts) {
+    %>
+      <div class="text-center py-4">
+        <h5 class="text-muted">No recruiter posts found.</h5>
+      </div>
+    <%
+        }
+    } catch (Exception e) {
+        out.println("<div class='alert alert-danger'>Error loading recruiter posts: " + e.getMessage() + "</div>");
+    } finally {
+        try { if (rs != null) rs.close(); } catch (Exception e) {}
+        try { if (pstmt != null) pstmt.close(); } catch (Exception e) {}
+    }
+    %>
+
+
+    <%
+    try {
+        ResultSet rs2 = dbc.getNewinternships("SELECT id, recruiter_email, comname, jobroll, skill, loc, deadline, salary, exp, des,  post_type FROM newpost WHERE recruiter_email = '" + recruiterEmail + "'");
+
+        boolean hasInternships = false;
+        while (rs2.next()) {
+            hasInternships = true;
+            int id = rs2.getInt("id");
+            String company = rs2.getString("comname");
+            String jobRole = rs2.getString("jobroll");
+            String skills = rs2.getString("skill");
+            String location = rs2.getString("loc");
+            Date deadline = rs2.getDate("deadline");
+            String salary = rs2.getString("salary");
+            String experience = rs2.getString("exp");
+            String description = rs2.getString("des");
+            String postType = rs2.getString("post_type");
+            if (description != null && description.length() > 100) {
+                description = description.substring(0, 100) + "...";
+            }
+    %>
+    <div class="modern-job-card">
+      <div class="modern-card-content">
+        <div class="card-header-row">
+          <h4><%= jobRole %></h4>
+           <span class="badge badge-<%= postType.equals("job") ? "job" : "internship" %>"><%= postType.toUpperCase() %></span>
+        </div>
+        <ul class="job-details">
+          <li><i class="fas fa-building"></i><strong> Company:</strong> <%= company %></li>
+          <li><i class="fas fa-tools"></i><strong> Skills:</strong> <%= skills %></li>
+          <li><i class="fas fa-map-marker-alt"></i><strong> Location:</strong> <%= location %></li>
+          <li><i class="fas fa-hourglass-half"></i><strong> Deadline:</strong> <%= deadline != null ? new java.text.SimpleDateFormat("dd-MM-yyyy").format(deadline) : "No deadline" %></li>
+          <li><i class="fas fa-money-bill-wave"></i><strong> Stipend:</strong> ₹<%= salary %></li>
+          <li><i class="fas fa-clock"></i><strong> Duration:</strong> <%= experience %></li>
+          <li><i class="fas fa-book-reader"></i><strong> What Will You Learn:</strong> <%= description %></li>
+        </ul>
+      </div>
+      <div class="card-actions">
+        <button class="btn edit" onclick="editPost(<%= id %>)"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn delete" onclick="deletePost(<%= id %>, '<%= jobRole %>')"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>
+    <%
+        }
+
+        if (!hasInternships) {
+    %>
+      <div class="text-center py-4">
+        <h5 class="text-muted">No new internship posts found.</h5>
+      </div>
+    <%
+        }
+
+        rs2.close();
+    } catch (Exception e) {
+        out.println("<div class='alert alert-danger'>Error loading internships: " + e.getMessage() + "</div>");
+    }
+    %>
+  </div>
+</div>
+    </div>
+
+  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script>
