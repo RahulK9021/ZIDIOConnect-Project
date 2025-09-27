@@ -451,16 +451,6 @@ CREATE TABLE `viewprofile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `viewprofile`
---
-
-LOCK TABLES `viewprofile` WRITE;
-/*!40000 ALTER TABLE `viewprofile` DISABLE KEYS */;
-INSERT INTO `viewprofile` VALUES ('sdjhje',_binary 'à¤à¤£à¤¤à¥ à¤¯à¤¾à¤¦à¥ à¥¨à¥¦à¥¨à¥«.pdf','abc@gmail.com','sddfs','6568454654654',NULL,'suhdjg','male','Single','https://copilot.microsoft.com','https://copilot.microsoft.com','https://copilot.microsoft.com','jknjknjkb','jhjknjkhkj','jkhjkbjjkl','jjhjhj','uhhbhjvghjbhg','hbhjhbkhbhbjhb'),('Rahul Rajendra Kumbhar',_binary 'NoteGPT-ER Diagram-1747037047437.pdf','rrk11062002@gmail.com','BCA','1012131415',NULL,'Kolhapur,Maharastra','male','Single','https://www.bing.com','https://github.com','','','','','','',''),('Sudhir Lanjekar ',_binary 'ZidioConnect-ER â Eraser.mhtml','sudhirlanjekar@gmail.com','MCA','9766232211',NULL,'Kolhapur,Maharastra','male','Single','https://www.bing.com','https://www.bing.com','https://www.bing.com','','','','','',''),('Sandesh Bhosale',_binary 'AdmissionRecipt.pdf','sandesh@gmail.com','MAC(computer science)','9834579434',NULL,'Kolhapur,Maharastra','male','Single','https://www.bing.com','https://www.google.com','https://github.com','Java Developer','MuteFrog It Solutions','2022 to 2024','Java, Springboot, JSP','Contributed in various projects , and worked with responsibility','5-7 LPA'),('Ritesh Madhukar Nevage ',_binary 'Adobe Scan 05 Feb 2025 (2) (1).pdf','riteshnevage@gmail.com','MCA ','9766232211',NULL,'Kolhapur,Maharastra','male','Single','https://www.bing.com','https://github.com','https://github.com','UI UX Designer  ','SadaBand IT Solutions ','2+ yrs ','Excellent Knowledge about frontend ','helped in various big projects ','3-4LPA'),('Ritesh Madhukar Nevage ',_binary 'recruiter_application_system.java','riteshnevage@gmail.com','MCA ','9766232211',NULL,'Kolhapur,Maharastra','male','Single','https://www.bing.com','https://github.com','https://github.com','','','','','',''),('Shubham Vinayak Chougule',_binary 'Assignment.docx','shubhamchougule@gmail.com','Diploma','8433579454',NULL,'Kolhapur,Maharastra','male','Single','https://www.bing.com','https://github.com','https://github.com','','','','','',''),('Anand Jayant Gaikwad',_binary 'RahulFinalCV.pdf','anand@gmail.com','Udemy Course','9689474726',NULL,'Pune,Maharastra','male','Single','https://www.bing.com','https://github.com','https://github.com','','','','','',''),('Sudhir Mohan Lanjekar',_binary 'à¤à¤£à¤¤à¥ à¤¯à¤¾à¤¦à¥ à¥¨à¥¦à¥¨à¥«.pdf','sudhirlanjekar333@gmail.com','MCA ','9834579434',NULL,'New Mumbai , Maharastra ','male','Single','https://www.bing.com','https://github.com','https://www.bing.com','UI UX Designer ','SadaBand IT Solutions ','2+ yrs ','Proficiency in designing tool','Worked as a team leader and worked on various projects','4-5 LPA');
-/*!40000 ALTER TABLE `viewprofile` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
@@ -471,3 +461,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-07-25 19:17:53
+
